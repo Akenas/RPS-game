@@ -1,4 +1,4 @@
-package mad.com.rps_game_manager.app;
+package mad.com.rpsmanager.app;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

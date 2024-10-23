@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
 
-import mad.com.rpsmanager.config.AppConfiguration;
+import mad.com.rpsmanager.infrastructure.config.AppConfiguration;
 
 /**
  * Main application class for the Rock Paper Scissors Game Manager.

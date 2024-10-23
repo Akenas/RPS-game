@@ -1,4 +1,4 @@
-package mad.com.rpsmanager.controller;
+package mad.com.rpsmanager.infrastructure.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

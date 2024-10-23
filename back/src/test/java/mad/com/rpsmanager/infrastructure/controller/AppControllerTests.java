@@ -1,4 +1,4 @@
-package mad.com.rps_game_manager.controller;
+package mad.com.rpsmanager.infrastructure.controller;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -10,8 +10,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
-
-import mad.com.rpsmanager.controller.AppController;
 
 /**
  * Test class for {@link AppController}.

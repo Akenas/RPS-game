@@ -1,9 +1,9 @@
-package mad.com.rpsmanager.config;
+package mad.com.rpsmanager.infrastructure.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import mad.com.rpsmanager.controller.AppController;
+import mad.com.rpsmanager.infrastructure.controller.AppController;
 
 /**
  * Configuration class for the Rock Paper Scissors Game Manager application.

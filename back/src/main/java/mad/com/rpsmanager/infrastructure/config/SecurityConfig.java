@@ -1,4 +1,4 @@
-package mad.com.rpsmanager.config;
+package mad.com.rpsmanager.infrastructure.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
