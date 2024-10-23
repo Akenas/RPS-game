@@ -1,0 +1,52 @@
+# Ignore Node.js dependencies (for Angular)
+/**/node_modules/
+/**/dist/
+/**/npm-debug.log*
+/**/yarn-error.log*
+
+# Ignore Angular build output
+/**/.angular/
+/**/.angular-cache/
+/**/*.log
+
+# Ignore environment files (customize if necessary)
+/**/src/environments/environment*.ts
+
+# Ignore Java build output
+/**/target/
+/**/bin/
+/**/*.class
+/**/*.war
+/**/*.jar
+
+# Maven specific files (if using Maven for Java)
+/**/.mvn/
+/**/!mvn/wrapper/maven-wrapper.jar
+/**/mvnw
+/**/mvnw.cmd
+/**/target/
+
+# Gradle specific files (if using Gradle for Java)
+/**/.gradle/
+/**/build/
+
+# Ignore IntelliJ IDEA and Eclipse project files
+/**/.idea/
+/**/*.iml
+/**/*.classpath
+/**/*.project
+/**/*.settings/
+
+# Visual Studio Code specific files
+/**/.vscode/
+/**/.vscode-test/
+
+# OS generated files
+/**/.DS_Store
+/**/Thumbs.db
+
+# Log files
+/**/*.log
+
+# Java temporary files
+/**/hs_err_pid*
