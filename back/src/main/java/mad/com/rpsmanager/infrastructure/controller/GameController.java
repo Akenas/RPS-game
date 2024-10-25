@@ -1,7 +1,14 @@
 package mad.com.rpsmanager.infrastructure.controller;
 
+import java.util.List;
+
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import lombok.RequiredArgsConstructor;
+import mad.com.rpsmanager.domain.model.game.GameMode;
+import mad.com.rpsmanager.service.game.GameService;
 
 /**
  * Controller class for handling application requests.
@@ -10,15 +17,20 @@ import org.springframework.web.bind.annotation.RestController;
  * </p>
  */
 @RestController
-public class AppController {
+@RequestMapping("/game")
+@RequiredArgsConstructor
+public class GameController {
     
+
+    private final GameService service;
+
     /**
      * Handles GET requests to the root URL ("/").
      *
      * @return a string indicating that the application is working
      */
-    @GetMapping("/")
-    public String rootController(){
-        return "it works";
+    @GetMapping("/modes")
+    public List<GameMode> getGameModes(){
+        return service.getGameModes();
     }
 }

@@ -11,15 +11,17 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 
+import mad.com.rpsmanager.app.RpsGameManagerApplication;
+
 /**
- * Test class for {@link AppController}.
+ * Test class for {@link GameController}.
  * <p>
- * This class contains tests to verify the functionality of the endpoints in the {@link AppController}.
+ * This class contains tests to verify the functionality of the endpoints in the {@link GameController}.
  * </p>
  */
-@WebMvcTest(AppController.class)
-@ContextConfiguration(classes = {AppController.class})
-public class AppControllerTests {
+@WebMvcTest(GameController.class)
+@ContextConfiguration(classes = {RpsGameManagerApplication.class})
+public class GameControllerTests {
     
     @Autowired
     private MockMvc mockMvc;
@@ -31,10 +33,10 @@ public class AppControllerTests {
      */
     @Test
     @WithMockUser(username = "user", roles = {"USER"})
-    public void rootController_ReturnsCorrectResponse() throws Exception {
-        mockMvc.perform(get("/"))
+    public void getGameModes_ReturnsCorrectResponse() throws Exception {
+        mockMvc.perform(get("/game/modes"))
                 .andExpect(status().isOk())
-                .andExpect(content().string("it works"));
+                .andExpect(content().json("[{},{},{},{}]"));
     }
     
 }
