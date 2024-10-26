@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Import;
 
 import mad.com.rpsmanager.infrastructure.controller.GameController;
 import mad.com.rpsmanager.service.game.GameService;
+import mad.com.rpsmanager.service.game.InMemoryGameService;
 
 /**
  * Configuration class for the Rock Paper Scissors Game Manager application.
@@ -29,6 +30,6 @@ public class AppConfiguration {
 
     @Bean
     public GameService gameService(){
-        return new GameService();
+        return new InMemoryGameService();
     }
 }

@@ -25,9 +25,9 @@ public class GameController {
     private final GameService service;
 
     /**
-     * Handles GET requests to the root URL ("/").
+     * Handles GET requests to the game modes URL ("/game/modes").
      *
-     * @return a string indicating that the application is working
+     * @return a List of the available game modes. See  {@link GameMode}
      */
     @GetMapping("/modes")
     public List<GameMode> getGameModes(){
