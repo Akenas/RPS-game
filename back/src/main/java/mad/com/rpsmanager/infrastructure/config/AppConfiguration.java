@@ -30,6 +30,8 @@ public class AppConfiguration {
 
     @Bean
     public GameService gameService(){
-        return new InMemoryGameService();
+        GameService service = new InMemoryGameService();
+        service.init();
+        return service;
     }
 }

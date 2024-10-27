@@ -13,6 +13,11 @@ import mad.com.rpsmanager.domain.model.game.players.Player;
 public interface GameService {
     
     /**
+     * Initializes the game service, setting up necessary data or configurations.
+     */
+    public void init();
+
+    /**
      * Retrieves the list of available game modes.
      *
      * @return a list of {@link GameMode} objects representing the game modes.

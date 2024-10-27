@@ -17,7 +17,11 @@ public class InMemoryGameServiceTests {
     private final GameMode OFFLINE_MODE = new GameMode(1, TYPE.OFFLINE, new BasicRuleset(3), "BO3 vs IA");
     @Test
     public void doesGetGameModes_OK() {
-        List<GameMode> modes = new InMemoryGameService().getGameModes();
+        
+        GameService service = new InMemoryGameService();
+        service.init();
+
+        List<GameMode> modes = service.getGameModes();
         Assertions.assertNotNull(modes);
         Assertions.assertEquals(4, modes.size());
     }
@@ -25,13 +29,17 @@ public class InMemoryGameServiceTests {
     @Test
     public void doesQueuePlayer_OK() {
 
-        boolean rs = new InMemoryGameService().queuePlayer(new BasicPlayer(0, "TEST_USER"),OFFLINE_MODE);
+        GameService service = new InMemoryGameService();
+        service.init();
+        boolean rs = service.queuePlayer(new BasicPlayer(0, "TEST_USER"),OFFLINE_MODE);
         Assertions.assertTrue(rs);
     }
 
     @Test
     public void doesRemovePlayerFromQueue_OK() {
+        
         GameService service = new InMemoryGameService();
+        service.init();
         service.queuePlayer(new BasicPlayer(0, "TEST_USER"),OFFLINE_MODE);
         boolean rs = service.removePlayerFromQueue(new BasicPlayer(0, "TEST_USER"),OFFLINE_MODE);
         Assertions.assertTrue(rs);
@@ -40,6 +48,7 @@ public class InMemoryGameServiceTests {
     @Test
     public void doesRemovePlayerFromQueue_OK_DONT_REMOVE() {
         GameService service = new InMemoryGameService();
+        service.init();
         service.queuePlayer(new BasicPlayer(0, "TEST_USER"),OFFLINE_MODE);
         boolean rs = service.removePlayerFromQueue(new BasicPlayer(0, "TEST_USER"),OFFLINE_MODE);
         Assertions.assertTrue(rs);
@@ -50,6 +59,7 @@ public class InMemoryGameServiceTests {
     public void doesGetOponent_OK() {
 
         GameService service = new InMemoryGameService();
+        service.init();
         Player player1 = new BasicPlayer(1, "TEST_USER");
         Player player2 = new BasicPlayer(2, "TEST_USER2");
         GameMode gameMode = new GameMode(3, TYPE.ONLINE, new BasicRuleset(3), "BO3 vs Player");
