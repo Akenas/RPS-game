@@ -55,7 +55,7 @@ public class InMemoryGameServiceTests {
         GameMode gameMode = new GameMode(3, TYPE.ONLINE, new BasicRuleset(3), "BO3 vs Player");
 
         service.queuePlayer(player1,gameMode);
-        Optional<Player> matchedPlayer = service.getOponent(player2, gameMode);
+        Optional<Player> matchedPlayer = service.getOpponent(player2, gameMode);
         
         Assertions.assertTrue(matchedPlayer.isPresent());
         Assertions.assertEquals(player1, matchedPlayer.get());

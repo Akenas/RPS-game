@@ -36,7 +36,7 @@ public interface GameService {
      * @return an {@link Optional} containing an opponent {@link Player} if available; 
      *         otherwise, an empty {@link Optional}.
      */
-    Optional<Player> getOponent(Player player, GameMode mode);
+    Optional<Player> getOpponent(Player player, GameMode mode);
 
     /**
      * Removes a player from the queue for the specified game mode.

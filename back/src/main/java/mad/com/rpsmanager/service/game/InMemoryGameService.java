@@ -29,7 +29,7 @@ public class InMemoryGameService implements GameService {
         else return false;
     }
 
-    public Optional<Player> getOponent(Player player, GameMode mode){
+    public Optional<Player> getOpponent(Player player, GameMode mode){
 
         Optional<WaitingPlayerWrapper> wrapper = waitingPlayers.stream().filter(w-> w.getMode().getId() == mode.getId()).findFirst();
         if(wrapper.isPresent()){
