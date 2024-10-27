@@ -7,6 +7,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import mad.com.rpsmanager.domain.model.game.ruleset.Ruleset;
 import mad.com.rpsmanager.domain.model.game.ruleset.Ruleset.RulesetOption;
 
@@ -18,6 +19,12 @@ import mad.com.rpsmanager.domain.model.game.ruleset.Ruleset.RulesetOption;
  */
 @RequiredArgsConstructor
 public class GameMatch {
+
+/**
+     * The id of the match.
+     */
+    @Getter
+    private final String id;
 
     private final int player1Id;
     private final int player2Id;

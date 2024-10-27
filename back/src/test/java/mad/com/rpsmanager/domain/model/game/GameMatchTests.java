@@ -1,5 +1,7 @@
 package mad.com.rpsmanager.domain.model.game;
 
+import java.util.UUID;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +15,7 @@ public class GameMatchTests {
     @Test
     public void doesStartMatch(){
 
-        GameMatch match = new GameMatch(1, 2, new BasicRuleset(ROUNDS_NUMBER));
+        GameMatch match = new GameMatch(UUID.randomUUID().toString(),1, 2, new BasicRuleset(ROUNDS_NUMBER));
         match.start();
         Assertions.assertTrue(match.isOngoing());
     }
@@ -21,7 +23,7 @@ public class GameMatchTests {
     @Test
     public void doesCreateInnitialRound_OK(){
 
-        GameMatch match = new GameMatch(1, 2, new BasicRuleset(ROUNDS_NUMBER));
+        GameMatch match = new GameMatch(UUID.randomUUID().toString(),1, 2, new BasicRuleset(ROUNDS_NUMBER));
         match.start().then().createRound();
         Assertions.assertEquals(1,match.getRounds().size());
     }
@@ -29,7 +31,7 @@ public class GameMatchTests {
     @Test
     public void doesCreateRound_KO_Max_Rounds(){
 
-        GameMatch match = new GameMatch(1, 2, new BasicRuleset(1));
+        GameMatch match = new GameMatch(UUID.randomUUID().toString(),1, 2, new BasicRuleset(1));
         
         Assertions.assertThrows(UnsupportedOperationException.class, ()->  match.start().then().createRound().then().createRound());
     }
@@ -37,14 +39,14 @@ public class GameMatchTests {
     @Test
     public void doesCreateRound_KO_Finished(){
 
-        GameMatch match = new GameMatch(1, 2, new BasicRuleset(ROUNDS_NUMBER));
+        GameMatch match = new GameMatch(UUID.randomUUID().toString(),1, 2, new BasicRuleset(ROUNDS_NUMBER));
         Assertions.assertThrows(UnsupportedOperationException.class, ()->   match.start().then().finish().then().createRound());
     }
 
     @Test
     public void doesComputeWinnerAgainstAI(){
 
-        GameMatch match = new GameMatch(1, 2, new BasicRuleset(ROUNDS_NUMBER));
+        GameMatch match = new GameMatch(UUID.randomUUID().toString(),1, 2, new BasicRuleset(ROUNDS_NUMBER));
         match.start();
 
         while(match.isOngoing()){
@@ -60,7 +62,7 @@ public class GameMatchTests {
     @Test
     public void doesComputeWinnerAgainstPlayer(){
 
-        GameMatch match = new GameMatch(1, 2, new BasicRuleset(ROUNDS_NUMBER));
+        GameMatch match = new GameMatch(UUID.randomUUID().toString(),1, 2, new BasicRuleset(ROUNDS_NUMBER));
         match.start();
 
         match.createRound()
