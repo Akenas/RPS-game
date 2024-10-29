@@ -1,4 +1,4 @@
-package mad.com.rpsmanager.service.game;
+package mad.com.rpsmanager.service.game.events;
 
 import java.io.IOException;
 

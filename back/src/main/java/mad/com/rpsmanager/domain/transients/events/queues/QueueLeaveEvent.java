@@ -2,7 +2,7 @@ package mad.com.rpsmanager.domain.transients.events.queues;
 
 import java.io.IOException;
 
-import mad.com.rpsmanager.service.game.GameServiceVisitor;
+import mad.com.rpsmanager.service.game.events.GameServiceVisitor;
 
 public class QueueLeaveEvent extends QueueEvent{
 

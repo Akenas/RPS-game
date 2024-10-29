@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import lombok.Data;
 import mad.com.rpsmanager.domain.transients.events.queues.QueueEvent;
-import mad.com.rpsmanager.service.game.GameServiceVisitor;
+import mad.com.rpsmanager.service.game.events.GameServiceVisitor;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
 @JsonSubTypes({
