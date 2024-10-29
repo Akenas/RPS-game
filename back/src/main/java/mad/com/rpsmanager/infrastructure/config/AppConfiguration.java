@@ -15,7 +15,7 @@ import mad.com.rpsmanager.service.game.InMemoryGameService;
  * </p>
  */
 @Configuration
-@Import(SecurityConfig.class)
+@Import({SecurityConfig.class, WebSocketConfiguration.class})
 public class AppConfiguration {
     
     /**
