@@ -3,6 +3,7 @@ package mad.com.rpsmanager.service.game;
 import java.util.List;
 import java.util.Optional;
 
+import mad.com.rpsmanager.domain.model.game.GameMatch;
 import mad.com.rpsmanager.domain.model.game.GameMode;
 import mad.com.rpsmanager.domain.model.game.players.Player;
 
@@ -31,17 +32,7 @@ public interface GameService {
      * @param mode the {@link GameMode} in which the player wishes to play.
      * @return {@code true} if the player is successfully queued; {@code false} otherwise.
      */
-    boolean queuePlayer(Player player, GameMode mode);
-
-    /**
-     * Retrieves an opponent for the specified player in the given game mode.
-     *
-     * @param player the {@link Player} looking for an opponent.
-     * @param mode the {@link GameMode} in which the opponent is to be found.
-     * @return an {@link Optional} containing an opponent {@link Player} if available; 
-     *         otherwise, an empty {@link Optional}.
-     */
-    Optional<Player> getOpponent(Player player, GameMode mode);
+    Optional<GameMatch> queuePlayer(int playerId, int gameModeId);
 
     /**
      * Removes a player from the queue for the specified game mode.
@@ -50,5 +41,9 @@ public interface GameService {
      * @param mode the {@link GameMode} from which the player is to be removed.
      * @return {@code true} if the player is successfully removed from the queue; {@code false} otherwise.
      */
-    boolean removePlayerFromQueue(Player player,GameMode mode);
+    boolean removePlayerFromQueue(int playerId, int gameModeId);
+
+    boolean setPlayerConnected(Player player);
+    boolean setPlayerDisconnected(int playerId);
+    List<Player> getConnectedPlayers();
 }
