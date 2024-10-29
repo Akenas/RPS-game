@@ -2,12 +2,24 @@ package mad.com.rpsmanager.domain.transients.events.queues;
 
 import java.io.IOException;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import lombok.Getter;
+import mad.com.rpsmanager.domain.transients.events.GameManagerEvent;
 import mad.com.rpsmanager.service.game.events.GameServiceVisitor;
 
-public class QueueLeaveEvent extends QueueEvent{
+public class QueueLeaveEvent extends GameManagerEvent{
 
-    public QueueLeaveEvent(int modeId, int playerId) {
-        super(modeId, playerId);
+    @Getter
+    private final int modeId;
+    @Getter
+    private final int playerId;
+
+    @JsonCreator
+    public QueueLeaveEvent(@JsonProperty("modeId") int modeId, @JsonProperty("playerId") int playerId){
+       this.modeId = modeId;
+       this.playerId = playerId;
     }
 
     @Override

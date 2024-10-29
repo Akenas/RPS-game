@@ -2,16 +2,26 @@ package mad.com.rpsmanager.domain.transients.events.queues;
 
 import java.io.IOException;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import lombok.Getter;
+import mad.com.rpsmanager.domain.transients.events.GameManagerEvent;
 import mad.com.rpsmanager.service.game.events.GameServiceVisitor;
 
-public class QueueJoinEvent extends QueueEvent {
+public class QueueJoinEvent extends GameManagerEvent {
 
+    @Getter
+    private final int modeId;
+    @Getter
+    private final int playerId;
 
-
-    public QueueJoinEvent(int modeId, int playerId) {
-        super(modeId, playerId);
+    @JsonCreator
+    public QueueJoinEvent(@JsonProperty("modeId") int modeId, @JsonProperty("playerId") int playerId){
+       this.modeId = modeId;
+       this.playerId = playerId;
     }
-
+   
     @Override
     public void accept(GameServiceVisitor visitor) throws IOException {
         visitor.visit(this);
