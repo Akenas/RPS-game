@@ -34,6 +34,8 @@ public interface GameService {
      */
     Optional<GameMatch> queuePlayer(int playerId, int gameModeId);
 
+
+
     /**
      * Removes a player from the queue for the specified game mode.
      *
@@ -46,4 +48,6 @@ public interface GameService {
     boolean setPlayerConnected(Player player);
     boolean setPlayerDisconnected(int playerId);
     List<Player> getConnectedPlayers();
+
+    Optional<GameMatch> computeMatchRound(String matchId, int playerId, int pick);
 }

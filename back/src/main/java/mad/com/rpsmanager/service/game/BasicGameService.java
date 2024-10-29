@@ -6,6 +6,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import mad.com.rpsmanager.domain.model.game.GameMatch;
 import mad.com.rpsmanager.domain.model.game.GameMode;
+import mad.com.rpsmanager.domain.model.game.GameMode.TYPE;
+import mad.com.rpsmanager.domain.model.game.players.BasicPlayer;
 import mad.com.rpsmanager.domain.model.game.players.Player;
 import mad.com.rpsmanager.service.queues.BasicGameQueue;
 import mad.com.rpsmanager.service.queues.GameQueue;
@@ -38,7 +40,7 @@ public abstract class BasicGameService implements GameService{
             if(optOpponent.isPresent()){
                 Player opponent = optOpponent.get();
                 GameMatch match = createGameMatch(player, opponent, mode);
-                return Optional.of(match);
+                return Optional.of(match.start().then().createRound());
             }else{
                 GameQueue queue = getGameQueueForMode(mode);
                 queue.queuePlayer(player);
@@ -73,9 +75,13 @@ public abstract class BasicGameService implements GameService{
      *         otherwise, an empty {@link Optional}.
      */
     private Optional<Player> getOpponent(Player player, GameMode mode) {
+        if(mode.getType().equals(TYPE.OFFLINE)){
+            return Optional.of(new BasicPlayer(0,"IA"));
+        }else{
+            GameQueue queue = getGameQueueForMode(mode);
+            return queue.getOpponent(player);
+        }
         
-        GameQueue queue = getGameQueueForMode(mode);
-        return queue.getOpponent(player);
     }
 
     

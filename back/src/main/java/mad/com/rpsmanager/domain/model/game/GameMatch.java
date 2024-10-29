@@ -7,9 +7,8 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import mad.com.rpsmanager.domain.model.game.GameMode.TYPE;
 import mad.com.rpsmanager.domain.model.game.players.Player;
-import mad.com.rpsmanager.domain.model.game.ruleset.Ruleset;
 import mad.com.rpsmanager.domain.model.game.ruleset.Ruleset.RulesetOption;
 
 /**
@@ -33,9 +32,10 @@ public class GameMatch {
     private final Player player2;
 
     /**
-     * The {@link Ruleset} used for this game match.
+     * The {@link GameMode} used for this game match.
      */
-    private final Ruleset ruleset;
+    @Getter
+    private final GameMode mode;
 
     @Getter
     private int winner;
@@ -80,12 +80,27 @@ public class GameMatch {
      * @return The current instance of GameMatch, allowing for method chaining.
      * @throws UnsupportedOperationException if there are no ongoing rounds to compute.
      */
-    public GameMatch computeOngoingRound(RulesetOption player1Pick, RulesetOption player2Pick) {
+    public GameMatch computeOngoingRound(RulesetOption playerPick, int playerId) {
         Optional<Round> optRound = rounds.stream().filter(r -> !r.isCompleted()).findFirst();
         if (optRound.isPresent()) {
+
             Round round = optRound.get();
-            round.determineWinner(player1Pick, player2Pick);
-            computeMatchResult();
+
+            if(playerId == player1.getId()){
+                round.setPlayer1Pick(playerPick);
+            }
+            if(playerId == player2.getId()){
+                round.setPlayer2Pick(playerPick);
+            }else if(mode.getType().equals(TYPE.OFFLINE)){
+                RulesetOption machinePick = RulesetOption.values()[ThreadLocalRandom.current().nextInt(0,
+                mode.getRuleset().getRulesetOptions().size())];
+                round.setPlayer2Pick(machinePick);
+            }
+            if(round.boothPlayersPicked()){
+                round.determineWinner();
+                computeMatchResult();
+            }
+            
             return this;
         } else
             throw new UnsupportedOperationException("Can not compute round. No ongoing rounds for this match");
@@ -99,9 +114,8 @@ public class GameMatch {
      */
     public GameMatch computeOngoingRound(RulesetOption player1Pick) {
 
-        RulesetOption machinePick = RulesetOption.values()[ThreadLocalRandom.current().nextInt(0,
-                ruleset.getRulesetOptions().size())];
-        return computeOngoingRound(player1Pick, machinePick);
+       
+        return computeOngoingRound(player1Pick, player1.getId());
     }
 
     /**
@@ -111,8 +125,8 @@ public class GameMatch {
      * @throws UnsupportedOperationException if the match has finished or the maximum number of rounds has been reached.
      */
     public GameMatch createRound() {
-        if (ongoing && rounds.size() < ruleset.getRoundsToPlay()) {
-            Round newRound = new Round(ruleset.getRulesetOptions().size());
+        if (ongoing && rounds.size() < mode.getRuleset().getRoundsToPlay()) {
+            Round newRound = new Round(mode.getRuleset().getRulesetOptions().size());
             rounds.add(newRound);
             return this;
         } else
@@ -145,7 +159,7 @@ public class GameMatch {
             }
         }
 
-        int roundsToWin = (ruleset.getRoundsToPlay() / 2) + 1; // e.g., 2 wins for bo3, 3 wins for bo5
+        int roundsToWin = (mode.getRuleset().getRoundsToPlay() / 2) + 1; // e.g., 2 wins for bo3, 3 wins for bo5
         if (player1Wins >= roundsToWin) {
             this.winner = 1; 
             finish();
@@ -164,4 +178,7 @@ public class GameMatch {
         return this;
     }
 
+    public boolean isOffline(){
+        return this.mode.getType().equals(TYPE.OFFLINE);
+    }
 }

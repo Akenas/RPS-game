@@ -13,6 +13,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import mad.com.rpsmanager.domain.model.game.GameMatch;
 import mad.com.rpsmanager.domain.model.game.players.BasicPlayer;
 import mad.com.rpsmanager.domain.transients.events.GameManagerEvent;
+import mad.com.rpsmanager.domain.transients.events.game.GameMatchPickEvent;
 import mad.com.rpsmanager.domain.transients.events.queues.QueueJoinEvent;
 import mad.com.rpsmanager.domain.transients.events.queues.QueueLeaveEvent;
 import mad.com.rpsmanager.service.game.GameService;
@@ -56,13 +57,12 @@ public class GameEventWebSocketProcessor extends GameEventProcessor {
             GameMatch match = optMatch.get();
 
             WebSocketSession player1Session = sessions.get(match.getPlayer1().getId());
-            WebSocketSession player2Session = sessions.get(match.getPlayer2().getId());
-            
             TextMessage returnMessage = new TextMessage(mapper.writeValueAsString(match));
-            
             player1Session.sendMessage(returnMessage);
-            player2Session.sendMessage(returnMessage);
-            
+            if(!match.isOffline()){
+                WebSocketSession player2Session = sessions.get(match.getPlayer2().getId());
+                player2Session.sendMessage(returnMessage);
+            }
         }else{
             WebSocketSession queued = sessions.get(event.getPlayerId());
             queued.sendMessage(new TextMessage("No opponent found. Waiting for someone to join"));
@@ -76,5 +76,24 @@ public class GameEventWebSocketProcessor extends GameEventProcessor {
         WebSocketSession playerSession = sessions.get(event.getPlayerId());
         playerSession.sendMessage(new TextMessage(String.valueOf(result)));
 
+    }
+
+    @Override
+    public void visit(GameMatchPickEvent event) throws IOException {
+
+        Optional<GameMatch> optMatch = gameService.computeMatchRound(event.getMatchId(), event.getPlayerId(), event.getPick());
+        if(optMatch.isPresent()){
+            GameMatch match = optMatch.get();
+
+            WebSocketSession player1Session = sessions.get(match.getPlayer1().getId());
+            TextMessage returnMessage = new TextMessage(mapper.writeValueAsString(match));
+            player1Session.sendMessage(returnMessage);
+            if(!match.isOffline()){
+                WebSocketSession player2Session = sessions.get(match.getPlayer2().getId());
+                player2Session.sendMessage(returnMessage);
+            }
+            
+            
+        }
     }
 }

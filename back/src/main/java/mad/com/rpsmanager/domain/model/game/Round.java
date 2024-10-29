@@ -1,7 +1,10 @@
 package mad.com.rpsmanager.domain.model.game;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import mad.com.rpsmanager.domain.model.game.ruleset.Ruleset.RulesetOption;
 
 /**
@@ -26,6 +29,13 @@ public class Round {
     @Getter
     private int winner;
 
+    @Setter
+    @JsonIgnore
+    private RulesetOption player1Pick;
+    @Setter
+    @JsonIgnore
+    private RulesetOption player2Pick;
+
     /**
      * Determines the winner between two players in a game with a customizable ruleset.
      *
@@ -36,7 +46,7 @@ public class Round {
      *         1 if Player 1 wins,
      *         2 if Player 2 wins.
      */
-    public int determineWinner(RulesetOption player1Pick, RulesetOption player2Pick){
+    public int determineWinner(){
         int result = (rulesetOptionsSize + player1Pick.ordinal() - player2Pick.ordinal()) % rulesetOptionsSize;
         if (result == 0) {
             winner = 0;
@@ -47,5 +57,9 @@ public class Round {
         }
         this.completed = true;
         return this.winner;
+    }
+
+    public boolean boothPlayersPicked(){
+        return this.player1Pick != null && this.player2Pick != null;
     }
 }
