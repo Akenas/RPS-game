@@ -37,7 +37,7 @@ public class InMemoryGameServiceTests {
 
         GameService service = new InMemoryGameService();
         service.init();
-        service.setPlayerConnected(PLAYER_1.getId());
+        service.setPlayerConnected(PLAYER_1);
 
         Optional<GameMatch> optMatch = service.queuePlayer(PLAYER_1.getId(),OFFLINE_MODE.getId());
         Assertions.assertFalse(optMatch.isPresent());
@@ -48,7 +48,7 @@ public class InMemoryGameServiceTests {
         
         GameService service = new InMemoryGameService();
         service.init();
-        service.setPlayerConnected(PLAYER_1.getId());
+        service.setPlayerConnected(PLAYER_1);
 
         service.queuePlayer(PLAYER_1.getId(),OFFLINE_MODE.getId());
         boolean rs = service.removePlayerFromQueue(PLAYER_1.getId(),OFFLINE_MODE.getId());
@@ -59,7 +59,7 @@ public class InMemoryGameServiceTests {
     public void doesRemovePlayerFromQueue_OK_DONT_REMOVE() {
         GameService service = new InMemoryGameService();
         service.init();
-        service.setPlayerConnected(PLAYER_1.getId());
+        service.setPlayerConnected(PLAYER_1);
 
         service.queuePlayer(PLAYER_1.getId(),OFFLINE_MODE.getId());
         boolean rs = service.removePlayerFromQueue(PLAYER_2.getId(),OFFLINE_MODE.getId());
@@ -72,8 +72,8 @@ public class InMemoryGameServiceTests {
 
         GameService service = new InMemoryGameService();
         service.init();
-        service.setPlayerConnected(PLAYER_1.getId());
-        service.setPlayerConnected(PLAYER_2.getId());
+        service.setPlayerConnected(PLAYER_1);
+        service.setPlayerConnected(PLAYER_2);
 
         Optional<GameMatch> optMatch1 =service.queuePlayer(PLAYER_1.getId(), ONLINE_MODE.getId());
         Optional<GameMatch> optMatch2 = service.queuePlayer(PLAYER_2.getId(), ONLINE_MODE.getId());
