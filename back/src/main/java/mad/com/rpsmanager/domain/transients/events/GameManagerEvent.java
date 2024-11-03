@@ -13,6 +13,11 @@ import mad.com.rpsmanager.domain.transients.events.queues.QueueJoinEvent;
 import mad.com.rpsmanager.domain.transients.events.queues.QueueLeaveEvent;
 import mad.com.rpsmanager.service.game.events.GameServiceVisitor;
 
+
+/**
+ * Class representing a generic application event.
+ * See {@link QueueJoinEvent}, {@link QueueLeaveEvent}, {@link GameMatchPickEvent},
+ */
 @JsonTypeInfo(include = As.EXISTING_PROPERTY, use = JsonTypeInfo.Id.NAME, property = "type")
 @JsonSubTypes({
     @JsonSubTypes.Type(value = QueueJoinEvent.class, name = "queue-join"),
@@ -23,5 +28,10 @@ import mad.com.rpsmanager.service.game.events.GameServiceVisitor;
 @NoArgsConstructor
 public abstract class GameManagerEvent {
 
+    /**
+     * 
+     * @param visitor The class implementing {@GameServiceVisitor} that will process the event.
+     * @throws IOException
+     */
     public abstract void accept(GameServiceVisitor visitor) throws IOException;
 }

@@ -2,7 +2,7 @@ package mad.com.rpsmanager.domain.model.game.players;
 
 /**
  * Represents a player with an ID, alias, and rating.
- * The player rating can be computed based on specific game logic.
+ * The player rating can be calculated based on specific game logic.
  */
 public interface Player {
 

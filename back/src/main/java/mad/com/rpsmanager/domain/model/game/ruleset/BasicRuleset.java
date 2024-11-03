@@ -25,10 +25,4 @@ public class BasicRuleset implements Ruleset{
     public List<RulesetOption> getRulesetOptions() {
         return List.of(RulesetOption.ROCK,RulesetOption.PAPER, RulesetOption.SCISSORS);
     }
-
-    @Override
-    public int getRoundsToPlay() {
-        return this.roundsToPlay;
-    }
-    
 }

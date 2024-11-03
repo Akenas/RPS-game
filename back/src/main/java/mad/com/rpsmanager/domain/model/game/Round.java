@@ -29,18 +29,22 @@ public class Round {
     @Getter
     private int winner;
 
+    /**
+     * The choice made by Player 1, represented as a {@link RulesetOption}.
+     */
     @Setter
     @JsonIgnore
     private RulesetOption player1Pick;
+
+    /**
+     * The choice made by Player 2, represented as a {@link RulesetOption}.
+     */
     @Setter
     @JsonIgnore
     private RulesetOption player2Pick;
 
     /**
      * Determines the winner between two players in a game with a customizable ruleset.
-     *
-     * @param player1Pick The choice made by Player 1, represented as a {@link RulesetOption}.
-     * @param player2Pick The choice made by Player 2, represented as a {@link RulesetOption}.
      * @return An integer representing the result of the game:
      *         0 if it's a tie,
      *         1 if Player 1 wins,

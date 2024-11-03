@@ -33,7 +33,7 @@ public class BasicPlayer implements Player {
 
     /**
      * Computes and updates the player's rating.
-     * In this basic implementation, the rating remains unchanged.
+     * In this implementation, the rating remains unchanged.
      */
     @Override
     public void computeRating() {

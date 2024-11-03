@@ -26,8 +26,17 @@ public class GameMatch {
     @Getter
     private final String id;
 
+    /**
+     * The {@link Player} on the first slot of the match.
+     * Usually the player that joined the queue last.
+     */
     @Getter
     private final Player player1;
+
+    /**
+     * The {@link Player} on the second slot of the match.
+     * Usually the player that is found as opponent.
+     */
     @Getter
     private final Player player2;
 

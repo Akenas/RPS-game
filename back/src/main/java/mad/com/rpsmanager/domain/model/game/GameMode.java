@@ -5,16 +5,10 @@ import mad.com.rpsmanager.domain.model.game.ruleset.Ruleset;
 
 /**
  * Represents a specific game mode with a unique identifier, type, associated ruleset, and name.
- * This class provides information about whether the game mode is online or offline and specifies 
- * the rule set that governs the gameplay.
  */
 @Data
 public class GameMode {
     
-    /**
-     * Enum representing the type of the game mode.
-     * A game mode can be either online or offline.
-     */
     public enum TYPE{
 
         /**
