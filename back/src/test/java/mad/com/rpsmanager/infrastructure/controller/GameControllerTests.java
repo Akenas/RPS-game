@@ -6,9 +6,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 
 import mad.com.rpsmanager.app.RpsGameManagerApplication;
@@ -19,15 +19,15 @@ import mad.com.rpsmanager.app.RpsGameManagerApplication;
  * This class contains tests to verify the functionality of the endpoints in the {@link GameController}.
  * </p>
  */
-@WebMvcTest(GameController.class)
-@ContextConfiguration(classes = {RpsGameManagerApplication.class})
+@SpringBootTest(classes = {RpsGameManagerApplication.class})
+@AutoConfigureMockMvc
 public class GameControllerTests {
     
     @Autowired
     private MockMvc mockMvc;
 
     /**
-     * Test to verify that the root endpoint ("/") returns the correct response.
+     * Test to verify that the root endpoint ("/game/modes") returns the correct response.
      *
      * @throws Exception if an error occurs during the request
      */
