@@ -32,7 +32,7 @@ public interface GameService {
      * @param mode the {@link GameMode} in which the player wishes to play.
      * @return {@code true} if the player is successfully queued; {@code false} otherwise.
      */
-    Optional<GameMatch> queuePlayer(int playerId, int gameModeId);
+    Optional<GameMatch> queuePlayer(long playerId, int gameModeId);
 
 
 
@@ -43,11 +43,11 @@ public interface GameService {
      * @param mode the {@link GameMode} from which the player is to be removed.
      * @return {@code true} if the player is successfully removed from the queue; {@code false} otherwise.
      */
-    boolean removePlayerFromQueue(int playerId, int gameModeId);
+    boolean removePlayerFromQueue(long playerId, int gameModeId);
 
     boolean setPlayerConnected(Player player);
-    boolean setPlayerDisconnected(int playerId);
+    boolean setPlayerDisconnected(long playerId);
     List<Player> getConnectedPlayers();
 
-    Optional<GameMatch> computeMatchRound(String matchId, int playerId, int pick);
+    Optional<GameMatch> computeMatchRound(String matchId, long playerId, int pick);
 }

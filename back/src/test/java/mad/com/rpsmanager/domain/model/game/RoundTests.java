@@ -1,5 +1,7 @@
 package mad.com.rpsmanager.domain.model.game;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +14,7 @@ public class RoundTests {
 
     @Test
     public void doesDetermineWinner_RockBeatsScissors(){
-        Round round = new Round(new BasicRuleset(ROUNDS_NUMBER).getRulesetOptions().size());
+        Round round = new Round(new BasicRuleset(ROUNDS_NUMBER, List.of(RulesetOption.ROCK, RulesetOption.PAPER, RulesetOption.SCISSORS)).getRulesetOptions().size());
         round.setPlayer1Pick(RulesetOption.ROCK);
         round.setPlayer2Pick(RulesetOption.SCISSORS);
         int winner = round.determineWinner();
@@ -21,7 +23,7 @@ public class RoundTests {
 
     @Test
     public void doesDetermineWinner_ScissorsBeatPaper(){
-        Round round = new Round(new BasicRuleset(ROUNDS_NUMBER).getRulesetOptions().size());
+        Round round = new Round(new BasicRuleset(ROUNDS_NUMBER, List.of(RulesetOption.ROCK, RulesetOption.PAPER, RulesetOption.SCISSORS)).getRulesetOptions().size());
         round.setPlayer1Pick(RulesetOption.SCISSORS);
         round.setPlayer2Pick(RulesetOption.PAPER);
         int winner = round.determineWinner();
@@ -30,7 +32,7 @@ public class RoundTests {
 
     @Test
     public void doesDetermineWinner_PaperBeatsRock(){
-        Round round = new Round(new BasicRuleset(ROUNDS_NUMBER).getRulesetOptions().size());
+        Round round = new Round(new BasicRuleset(ROUNDS_NUMBER, List.of(RulesetOption.ROCK, RulesetOption.PAPER, RulesetOption.SCISSORS)).getRulesetOptions().size());
         round.setPlayer1Pick(RulesetOption.PAPER);
         round.setPlayer2Pick(RulesetOption.ROCK);
         int winner = round.determineWinner();
@@ -39,7 +41,7 @@ public class RoundTests {
 
     @Test
     public void doesDetermineWinner_Tie(){
-        Round round = new Round(new BasicRuleset(ROUNDS_NUMBER).getRulesetOptions().size());
+        Round round = new Round(new BasicRuleset(ROUNDS_NUMBER, List.of(RulesetOption.ROCK, RulesetOption.PAPER, RulesetOption.SCISSORS)).getRulesetOptions().size());
         round.setPlayer1Pick(RulesetOption.PAPER);
         round.setPlayer2Pick(RulesetOption.PAPER);
         int winner = round.determineWinner();
@@ -48,7 +50,7 @@ public class RoundTests {
 
     @Test
     public void doesDetermineWinner_PlayerTwoWins(){
-        Round round = new Round(new BasicRuleset(ROUNDS_NUMBER).getRulesetOptions().size());
+        Round round = new Round(new BasicRuleset(ROUNDS_NUMBER,List.of(RulesetOption.ROCK, RulesetOption.PAPER, RulesetOption.SCISSORS)).getRulesetOptions().size());
         round.setPlayer1Pick(RulesetOption.PAPER);
         round.setPlayer2Pick(RulesetOption.SCISSORS);
         int winner = round.determineWinner();

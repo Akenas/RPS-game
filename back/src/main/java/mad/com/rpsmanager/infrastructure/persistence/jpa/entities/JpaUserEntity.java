@@ -17,7 +17,7 @@ import lombok.Data;
 
 
 @Entity
-@Table
+@Table(name = "users")
 @Data
 public class JpaUserEntity {
 

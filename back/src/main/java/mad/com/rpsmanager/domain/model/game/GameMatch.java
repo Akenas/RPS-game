@@ -20,7 +20,7 @@ import mad.com.rpsmanager.domain.model.game.ruleset.Ruleset.RulesetOption;
 @RequiredArgsConstructor
 public class GameMatch {
 
-/**
+    /**
      * The id of the match.
      */
     @Getter
@@ -89,7 +89,7 @@ public class GameMatch {
      * @return The current instance of GameMatch, allowing for method chaining.
      * @throws UnsupportedOperationException if there are no ongoing rounds to compute.
      */
-    public GameMatch computeOngoingRound(RulesetOption playerPick, int playerId) {
+    public GameMatch computeOngoingRound(RulesetOption playerPick, long playerId) {
         Optional<Round> optRound = rounds.stream().filter(r -> !r.isCompleted()).findFirst();
         if (optRound.isPresent()) {
 

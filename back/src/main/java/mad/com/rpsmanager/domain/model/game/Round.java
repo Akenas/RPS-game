@@ -33,6 +33,7 @@ public class Round {
      * The choice made by Player 1, represented as a {@link RulesetOption}.
      */
     @Setter
+    @Getter
     @JsonIgnore
     private RulesetOption player1Pick;
 
@@ -40,6 +41,7 @@ public class Round {
      * The choice made by Player 2, represented as a {@link RulesetOption}.
      */
     @Setter
+    @Getter
     @JsonIgnore
     private RulesetOption player2Pick;
 

@@ -8,14 +8,14 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import mad.com.rpsmanager.domain.repositories.UserRepository;
-import mad.com.rpsmanager.infrastructure.persistence.UserRepositoryImpl;
+import mad.com.rpsmanager.infrastructure.persistence.jpa.UserRepositoryImpl;
 import mad.com.rpsmanager.infrastructure.persistence.jpa.mappers.UserMapper;
 import mad.com.rpsmanager.infrastructure.persistence.jpa.repositories.JpaUserRepository;
 
 @Configuration
 @EnableTransactionManagement(proxyTargetClass = true)
-@EnableJpaRepositories("mad.com.rpsmanager.infrastructure.persistance.jpa")
-@EntityScan("mad.com.rpsmanager.infrastructure.persistance.jpa")
+@EnableJpaRepositories("mad.com.rpsmanager.infrastructure.persistence.jpa")
+@EntityScan("mad.com.rpsmanager.infrastructure.persistence.jpa")
 public class JpaPersistanceConfiguration {
  
     

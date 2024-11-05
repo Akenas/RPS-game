@@ -26,7 +26,7 @@ public abstract class BasicGameService implements GameService{
     }
 
     @Override
-    public Optional<GameMatch> queuePlayer(int playerId, int gameModeId) {
+    public Optional<GameMatch> queuePlayer(long playerId, int gameModeId) {
 
 
         Optional<Player> optPlayer = getPlayerById(playerId);
@@ -51,7 +51,7 @@ public abstract class BasicGameService implements GameService{
     }
 
     @Override
-    public boolean removePlayerFromQueue(int playerId, int modeId) {
+    public boolean removePlayerFromQueue(long playerId, int modeId) {
         
         Optional<Player> optPlayer = getPlayerById(playerId);
         Optional<GameMode> optMode = getGameModeById(modeId);
@@ -106,5 +106,5 @@ public abstract class BasicGameService implements GameService{
      *
      * @return a Optional of {@link Player} if found.
      */
-    protected abstract  Optional<Player> getPlayerById(int id);
+    protected abstract  Optional<Player> getPlayerById(long id);
 }

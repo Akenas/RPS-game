@@ -12,11 +12,12 @@ import mad.com.rpsmanager.domain.model.game.GameMode.TYPE;
 import mad.com.rpsmanager.domain.model.game.players.BasicPlayer;
 import mad.com.rpsmanager.domain.model.game.players.Player;
 import mad.com.rpsmanager.domain.model.game.ruleset.BasicRuleset;
+import mad.com.rpsmanager.domain.model.game.ruleset.Ruleset.RulesetOption;
 
 public class InMemoryGameServiceTests {
 
-    private final GameMode OFFLINE_MODE = new GameMode(1, TYPE.OFFLINE, new BasicRuleset(3), "BO3 vs IA");
-    private final GameMode ONLINE_MODE = new GameMode(3, TYPE.ONLINE, new BasicRuleset(3), "BO3 vs Player");
+    private final GameMode OFFLINE_MODE = new GameMode(1, TYPE.OFFLINE, new BasicRuleset(3, List.of(RulesetOption.ROCK, RulesetOption.PAPER, RulesetOption.SCISSORS)), "BO3 vs IA");
+    private final GameMode ONLINE_MODE = new GameMode(3, TYPE.ONLINE, new BasicRuleset(3,List.of(RulesetOption.ROCK, RulesetOption.PAPER, RulesetOption.SCISSORS)), "BO3 vs Player");
     
     private final Player PLAYER_1 = new BasicPlayer(1, "TEST_USER_1");
     private final Player PLAYER_2 = new BasicPlayer(2, "TEST_USER_2");

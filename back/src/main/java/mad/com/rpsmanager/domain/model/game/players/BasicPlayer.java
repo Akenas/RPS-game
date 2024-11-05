@@ -17,7 +17,7 @@ public class BasicPlayer implements Player {
      * Unique identifier of the player.
      */
     @Getter
-    private final int id;
+    private final long id;
 
     /**
      * Alias or nickname of the player.

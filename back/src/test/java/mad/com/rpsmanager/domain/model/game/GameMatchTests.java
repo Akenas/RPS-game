@@ -1,5 +1,6 @@
 package mad.com.rpsmanager.domain.model.game;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.junit.jupiter.api.Assertions;
@@ -16,8 +17,8 @@ public class GameMatchTests {
     private static final int ROUNDS_NUMBER = 3;
     private final Player PLAYER_1 = new BasicPlayer(1, "TEST_USER_1");
     private final Player PLAYER_2 = new BasicPlayer(2, "TEST_USER_2");
-    private final GameMode ONLINE_MODE = new GameMode(3, TYPE.ONLINE, new BasicRuleset(ROUNDS_NUMBER), "BO3 vs Player");
-    private final GameMode OFFLINE_MODE = new GameMode(1, TYPE.OFFLINE, new BasicRuleset(ROUNDS_NUMBER), "BO3 vs IA");
+    private final GameMode ONLINE_MODE = new GameMode(3, TYPE.ONLINE, new BasicRuleset(ROUNDS_NUMBER,List.of(RulesetOption.ROCK, RulesetOption.PAPER, RulesetOption.SCISSORS)), "BO3 vs Player");
+    private final GameMode OFFLINE_MODE = new GameMode(1, TYPE.OFFLINE, new BasicRuleset(ROUNDS_NUMBER,List.of(RulesetOption.ROCK, RulesetOption.PAPER, RulesetOption.SCISSORS)), "BO3 vs IA");
     
     @Test
     public void doesStartMatch(){

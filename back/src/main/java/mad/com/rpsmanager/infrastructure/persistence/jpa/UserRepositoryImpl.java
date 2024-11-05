@@ -1,21 +1,18 @@
-package mad.com.rpsmanager.infrastructure.persistence;
+package mad.com.rpsmanager.infrastructure.persistence.jpa;
 
 import java.util.Optional;
 
+import lombok.RequiredArgsConstructor;
 import mad.com.rpsmanager.domain.model.users.User;
 import mad.com.rpsmanager.domain.repositories.UserRepository;
 import mad.com.rpsmanager.infrastructure.persistence.jpa.entities.JpaUserEntity;
 import mad.com.rpsmanager.infrastructure.persistence.jpa.mappers.UserMapper;
 import mad.com.rpsmanager.infrastructure.persistence.jpa.repositories.JpaUserRepository;
 
-
+@RequiredArgsConstructor
 public class UserRepositoryImpl implements UserRepository {
 
     private final JpaUserRepository jpaUserRepository;
-
-    public UserRepositoryImpl(JpaUserRepository jpaUserRepository) {
-        this.jpaUserRepository = jpaUserRepository;
-    }
 
     @Override
     public Optional<User> findByEmail(String email) {

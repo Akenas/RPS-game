@@ -11,7 +11,7 @@ public interface Player {
      *
      * @return the player's ID.
      */
-    int getId();
+    long getId();
 
      /**
      * Retrieves the alias or nickname of the player.
