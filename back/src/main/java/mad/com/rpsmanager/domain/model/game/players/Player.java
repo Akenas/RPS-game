@@ -31,4 +31,8 @@ public interface Player {
      * Computes and updates the player's rating based on gameplay outcomes.
      */
     void computeRating();
+
+    boolean isConnected();
+
+    void setConnected(boolean connected);
 }

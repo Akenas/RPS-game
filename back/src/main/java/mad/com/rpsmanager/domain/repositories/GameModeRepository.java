@@ -7,8 +7,9 @@ import mad.com.rpsmanager.domain.model.game.GameMode;
 
 public interface GameModeRepository {
     
-    Optional<GameMode> findById(Long id);
+    List<GameMode> findAll();
+    Optional<GameMode> findById(int id);
     Optional<GameMode> findByName(String name);
     List<GameMode> findByType(String type);
-    GameMode save(GameMode user);
+    GameMode save(GameMode gameMode);
 }

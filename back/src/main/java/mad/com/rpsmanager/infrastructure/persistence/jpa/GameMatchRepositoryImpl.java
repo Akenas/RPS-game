@@ -47,8 +47,8 @@ public class GameMatchRepositoryImpl implements GameMatchRepository{
 
     @Override
     public GameMatch save(GameMatch match) {
-        JpaGameMatchEntity userEntity = GameMatchMapper.INSTANCE.toEntity(match);
-        JpaGameMatchEntity savedEntity = jpaGameMatchRepository.save(userEntity);
+        JpaGameMatchEntity matchEntity = GameMatchMapper.INSTANCE.toEntity(match);
+        JpaGameMatchEntity savedEntity = jpaGameMatchRepository.save(matchEntity);
         return GameMatchMapper.INSTANCE.toDomain(savedEntity);
     }
     

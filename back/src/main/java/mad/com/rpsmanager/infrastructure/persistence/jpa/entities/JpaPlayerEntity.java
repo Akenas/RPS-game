@@ -21,4 +21,6 @@ public class JpaPlayerEntity {
     private String alias;
 
     private int rating;
+
+    private boolean connected;
 }

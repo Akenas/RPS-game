@@ -11,6 +11,8 @@ import lombok.Data;
 @Data
 public class BasicRuleset implements Ruleset{
 
+    private int id;
+
     /**
      * The number of rounds to play in this ruleset.
      */
