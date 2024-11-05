@@ -1,12 +1,12 @@
-package mad.com.rpsmanager.infrastructure.persistance;
+package mad.com.rpsmanager.infrastructure.persistence;
 
 import java.util.Optional;
 
 import mad.com.rpsmanager.domain.model.users.User;
-import mad.com.rpsmanager.domain.model.users.UserRepository;
-import mad.com.rpsmanager.infrastructure.persistance.jpa.users.JpaUserEntity;
-import mad.com.rpsmanager.infrastructure.persistance.jpa.users.JpaUserRepository;
-import mad.com.rpsmanager.infrastructure.persistance.jpa.users.UserMapper;
+import mad.com.rpsmanager.domain.repositories.UserRepository;
+import mad.com.rpsmanager.infrastructure.persistence.jpa.users.JpaUserEntity;
+import mad.com.rpsmanager.infrastructure.persistence.jpa.users.JpaUserRepository;
+import mad.com.rpsmanager.infrastructure.persistence.jpa.users.UserMapper;
 
 
 public class UserRepositoryImpl implements UserRepository {

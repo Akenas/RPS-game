@@ -1,4 +1,4 @@
-package mad.com.rpsmanager.infrastructure.persistance.jpa.users;
+package mad.com.rpsmanager.infrastructure.persistence.jpa.users;
 
 import java.util.Optional;
 

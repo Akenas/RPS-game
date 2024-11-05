@@ -14,7 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 
 import lombok.RequiredArgsConstructor;
-import mad.com.rpsmanager.domain.model.users.UserRepository;
+import mad.com.rpsmanager.domain.repositories.UserRepository;
 import mad.com.rpsmanager.infrastructure.controller.AuthenticationController;
 import mad.com.rpsmanager.service.security.AuthenticationService;
 import mad.com.rpsmanager.service.security.jwt.JwtAuthenticationFilter;

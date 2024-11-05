@@ -7,10 +7,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import mad.com.rpsmanager.domain.model.users.UserRepository;
-import mad.com.rpsmanager.infrastructure.persistance.UserRepositoryImpl;
-import mad.com.rpsmanager.infrastructure.persistance.jpa.users.JpaUserRepository;
-import mad.com.rpsmanager.infrastructure.persistance.jpa.users.UserMapper;
+import mad.com.rpsmanager.domain.repositories.UserRepository;
+import mad.com.rpsmanager.infrastructure.persistence.UserRepositoryImpl;
+import mad.com.rpsmanager.infrastructure.persistence.jpa.users.JpaUserRepository;
+import mad.com.rpsmanager.infrastructure.persistence.jpa.users.UserMapper;
 
 @Configuration
 @EnableTransactionManagement(proxyTargetClass = true)
