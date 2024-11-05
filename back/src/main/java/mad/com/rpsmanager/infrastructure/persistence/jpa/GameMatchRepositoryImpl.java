@@ -2,7 +2,6 @@ package mad.com.rpsmanager.infrastructure.persistence.jpa;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
 import mad.com.rpsmanager.domain.model.game.GameMatch;
@@ -26,7 +25,7 @@ public class GameMatchRepositoryImpl implements GameMatchRepository{
         return jpaGameMatchRepository.findByPlayer1IdOrPlayer2Id(id)
             .stream()
             .map(GameMatchMapper.INSTANCE::toDomain)
-            .collect(Collectors.toList());
+            .toList();
     }
 
     @Override
@@ -34,7 +33,7 @@ public class GameMatchRepositoryImpl implements GameMatchRepository{
         return jpaGameMatchRepository.findByModeId(id)
             .stream()
             .map(GameMatchMapper.INSTANCE::toDomain)
-            .collect(Collectors.toList());
+            .toList();
     }
 
     @Override
@@ -42,7 +41,7 @@ public class GameMatchRepositoryImpl implements GameMatchRepository{
         return jpaGameMatchRepository.findByOngoingTrue()
             .stream()
             .map(GameMatchMapper.INSTANCE::toDomain)
-            .collect(Collectors.toList());
+            .toList();
     }
 
     @Override

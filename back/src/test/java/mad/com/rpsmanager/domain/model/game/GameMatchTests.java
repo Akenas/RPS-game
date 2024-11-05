@@ -1,7 +1,6 @@
 package mad.com.rpsmanager.domain.model.game;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -23,7 +22,7 @@ public class GameMatchTests {
     @Test
     public void doesStartMatch(){
 
-        GameMatch match = new GameMatch(UUID.randomUUID().toString(),PLAYER_1, PLAYER_2, ONLINE_MODE);
+        GameMatch match = new GameMatch(PLAYER_1, PLAYER_2, ONLINE_MODE);
         match.start();
         Assertions.assertTrue(match.isOngoing());
     }
@@ -31,7 +30,7 @@ public class GameMatchTests {
     @Test
     public void doesCreateInnitialRound_OK(){
 
-        GameMatch match = new GameMatch(UUID.randomUUID().toString(),PLAYER_1, PLAYER_2, ONLINE_MODE);
+        GameMatch match = new GameMatch(PLAYER_1, PLAYER_2, ONLINE_MODE);
         match.start().then().createRound();
         Assertions.assertEquals(1,match.getRounds().size());
     }
@@ -39,7 +38,7 @@ public class GameMatchTests {
     @Test
     public void doesCreateRound_KO_Max_Rounds(){
 
-        GameMatch match = new GameMatch(UUID.randomUUID().toString(),PLAYER_1, PLAYER_2,ONLINE_MODE);
+        GameMatch match = new GameMatch(PLAYER_1, PLAYER_2,ONLINE_MODE);
         
         Assertions.assertThrows(UnsupportedOperationException.class, ()->  match.start().then().createRound().then().createRound().then().createRound().then().createRound());
     }
@@ -47,14 +46,14 @@ public class GameMatchTests {
     @Test
     public void doesCreateRound_KO_Finished(){
 
-        GameMatch match = new GameMatch(UUID.randomUUID().toString(),PLAYER_1, PLAYER_2, ONLINE_MODE);
+        GameMatch match = new GameMatch(PLAYER_1, PLAYER_2, ONLINE_MODE);
         Assertions.assertThrows(UnsupportedOperationException.class, ()->   match.start().then().finish().then().createRound());
     }
 
     @Test
     public void doesComputeWinnerAgainstAI(){
 
-        GameMatch match = new GameMatch(UUID.randomUUID().toString(),PLAYER_1, PLAYER_2, OFFLINE_MODE);
+        GameMatch match = new GameMatch(PLAYER_1, PLAYER_2, OFFLINE_MODE);
         match.start();
 
         while(match.isOngoing()){
@@ -70,7 +69,7 @@ public class GameMatchTests {
     @Test
     public void doesComputeWinnerAgainstPlayer(){
 
-        GameMatch match = new GameMatch(UUID.randomUUID().toString(),PLAYER_1, PLAYER_2, ONLINE_MODE);
+        GameMatch match = new GameMatch(PLAYER_1, PLAYER_2, ONLINE_MODE);
         match.start();
 
         match.createRound()

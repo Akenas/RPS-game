@@ -5,13 +5,13 @@ import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;
 
-import mad.com.rpsmanager.domain.model.game.GameMode;
 import mad.com.rpsmanager.infrastructure.persistence.jpa.entities.JpaGameModeEntity;
 
 public interface JpaGameModeRepository extends CrudRepository<JpaGameModeEntity, Integer>{
 
-    Optional<GameMode> findById(int id);
-    Optional<GameMode> findByName(String name);
-    List<GameMode> findByType(int type);
+    List<JpaGameModeEntity> findAll();
+    Optional<JpaGameModeEntity> findById(int id);
+    Optional<JpaGameModeEntity> findByName(String name);
+    List<JpaGameModeEntity> findByType(int type);
     
 } 

@@ -7,6 +7,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import mad.com.rpsmanager.domain.model.game.GameMode.TYPE;
 import mad.com.rpsmanager.domain.model.game.players.Player;
 import mad.com.rpsmanager.domain.model.game.ruleset.Ruleset.RulesetOption;
@@ -24,27 +25,31 @@ public class GameMatch {
      * The id of the match.
      */
     @Getter
-    private final String id;
+    @Setter
+    private String id;
 
     /**
      * The {@link Player} on the first slot of the match.
      * Usually the player that joined the queue last.
      */
     @Getter
-    private final Player player1;
+    @Setter
+    private  Player player1;
 
     /**
      * The {@link Player} on the second slot of the match.
      * Usually the player that is found as opponent.
      */
     @Getter
-    private final Player player2;
+    @Setter
+    private  Player player2;
 
     /**
      * The {@link GameMode} used for this game match.
      */
     @Getter
-    private final GameMode mode;
+    @Setter
+    private  GameMode mode;
 
     @Getter
     private int winner;
@@ -60,6 +65,19 @@ public class GameMatch {
      */
     @Getter
     private boolean ongoing;
+
+    public GameMatch(String id, Player player, Player opponent, GameMode mode){
+        this.id = id;
+        this.player1 = player;
+        this.player2 = opponent;
+        this.mode = mode;
+    }
+
+    public GameMatch(Player player, Player opponent, GameMode mode){
+        this.player1 = player;
+        this.player2 = opponent;
+        this.mode = mode;
+    }
 
     /**
      * Starts the game match.

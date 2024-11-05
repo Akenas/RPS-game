@@ -10,6 +10,6 @@ public interface GameModeRepository {
     List<GameMode> findAll();
     Optional<GameMode> findById(int id);
     Optional<GameMode> findByName(String name);
-    List<GameMode> findByType(String type);
+    List<GameMode> findByType(int type);
     GameMode save(GameMode gameMode);
 }

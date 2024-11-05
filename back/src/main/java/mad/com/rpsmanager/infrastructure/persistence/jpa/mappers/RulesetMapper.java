@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
@@ -13,6 +14,7 @@ import mad.com.rpsmanager.domain.model.game.ruleset.Ruleset;
 import mad.com.rpsmanager.domain.model.game.ruleset.Ruleset.RulesetOption;
 import mad.com.rpsmanager.infrastructure.persistence.jpa.entities.JpaRulesetEntity;
 
+@Mapper
 public interface RulesetMapper {
     
     RulesetMapper INSTANCE = Mappers.getMapper(RulesetMapper.class);
