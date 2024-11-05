@@ -18,11 +18,7 @@ import mad.com.rpsmanager.service.game.InMemoryGameService;
  * </p>
  */
 @Configuration
-@EnableTransactionManagement(proxyTargetClass = true)
-@EnableJpaRepositories("mad.com.rpsmanager.infrastructure.persistance")
-@EntityScan("mad.com.rpsmanager.domain.model")
-@Import({AuthenticationConfig.class,SecurityConfig.class, WebSocketConfiguration.class})
-
+@Import({JpaPersistanceConfiguration.class, AuthenticationConfig.class,SecurityConfig.class, WebSocketConfiguration.class})
 public class AppConfiguration {
     
     /**

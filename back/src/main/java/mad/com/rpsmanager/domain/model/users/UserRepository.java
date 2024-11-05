@@ -1,8 +1,6 @@
-package mad.com.rpsmanager.domain.repositories;
+package mad.com.rpsmanager.domain.model.users;
 
 import java.util.Optional;
-
-import mad.com.rpsmanager.domain.model.users.User;
 
 public interface UserRepository {
     

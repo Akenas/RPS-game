@@ -6,7 +6,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import lombok.RequiredArgsConstructor;
 import mad.com.rpsmanager.domain.model.users.User;
-import mad.com.rpsmanager.domain.repositories.UserRepository;
+import mad.com.rpsmanager.domain.model.users.UserRepository;
 import mad.com.rpsmanager.domain.transients.users.LoginUserDto;
 import mad.com.rpsmanager.domain.transients.users.RegisterUserDto;
 
