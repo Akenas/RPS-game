@@ -1,4 +1,4 @@
-package mad.com.rpsmanager.infrastructure.persistence.jpa.users;
+package mad.com.rpsmanager.infrastructure.persistence.jpa.entities;
 
 import java.time.LocalDate;
 

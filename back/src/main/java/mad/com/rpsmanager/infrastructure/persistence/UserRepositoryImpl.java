@@ -4,9 +4,9 @@ import java.util.Optional;
 
 import mad.com.rpsmanager.domain.model.users.User;
 import mad.com.rpsmanager.domain.repositories.UserRepository;
-import mad.com.rpsmanager.infrastructure.persistence.jpa.users.JpaUserEntity;
-import mad.com.rpsmanager.infrastructure.persistence.jpa.users.JpaUserRepository;
-import mad.com.rpsmanager.infrastructure.persistence.jpa.users.UserMapper;
+import mad.com.rpsmanager.infrastructure.persistence.jpa.entities.JpaUserEntity;
+import mad.com.rpsmanager.infrastructure.persistence.jpa.mappers.UserMapper;
+import mad.com.rpsmanager.infrastructure.persistence.jpa.repositories.JpaUserRepository;
 
 
 public class UserRepositoryImpl implements UserRepository {
@@ -32,5 +32,10 @@ public class UserRepositoryImpl implements UserRepository {
         JpaUserEntity userEntity = UserMapper.INSTANCE.toEntity(user);
         JpaUserEntity savedEntity = jpaUserRepository.save(userEntity);
         return UserMapper.INSTANCE.toDomain(savedEntity);
+    }
+
+    @Override
+    public Optional<User> findById(Long id) {
+        return jpaUserRepository.findById(id).map(UserMapper.INSTANCE::toDomain);
     }
 }
