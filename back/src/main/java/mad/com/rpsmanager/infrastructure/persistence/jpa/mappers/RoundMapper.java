@@ -24,13 +24,17 @@ public interface RoundMapper {
     JpaRoundEntity toEntity(Round round);
 
     @Named("intToRulesetOption")
-    default Ruleset.RulesetOption intToRulesetOption(int pick) {
-        return Ruleset.RulesetOption.values()[pick];
+    default Ruleset.RulesetOption intToRulesetOption(Integer pick) {
+        if(pick != null)
+            return Ruleset.RulesetOption.values()[pick];
+        else return null;
     }
 
     @Named("rulesetOptionToInt")
-    default int rulesetOptionToInt(Ruleset.RulesetOption option) {
-        return option.ordinal();
+    default Integer rulesetOptionToInt(Ruleset.RulesetOption option) {
+        if(option != null)
+            return option.ordinal();
+        else return null;
     }
 }
 

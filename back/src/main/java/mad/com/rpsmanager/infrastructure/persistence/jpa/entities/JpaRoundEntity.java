@@ -20,9 +20,9 @@ public class JpaRoundEntity {
     private long id;
 
     private boolean completed;
-    private int winner;
-    private int player1Pick;
-    private int player2Pick;
+    private Integer winner;
+    private Integer player1Pick;
+    private Integer player2Pick;
 
     @ManyToOne
     @JoinColumn(name = "game_match_id")
