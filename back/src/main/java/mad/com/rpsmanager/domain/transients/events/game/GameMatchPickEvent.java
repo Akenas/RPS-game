@@ -14,12 +14,12 @@ public class GameMatchPickEvent extends GameManagerEvent {
     @Getter
     private final String matchId;
     @Getter
-    private final int playerId;
+    private final long playerId;
     @Getter
     private final int pick;
 
     @JsonCreator
-    public GameMatchPickEvent(@JsonProperty("matchId") String matchId, @JsonProperty("playerId") int playerId,@JsonProperty("pick") int pick){
+    public GameMatchPickEvent(@JsonProperty("matchId") String matchId, @JsonProperty("playerId") long playerId,@JsonProperty("pick") int pick){
        this.matchId = matchId;
        this.playerId = playerId;
        this.pick = pick;

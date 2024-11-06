@@ -21,7 +21,7 @@ import mad.com.rpsmanager.service.game.events.GameEventProcessor;
 
 public class GameEventWebSocketProcessor extends GameEventProcessor {
     
-    private final Map<Integer, WebSocketSession> sessions = new ConcurrentHashMap<>();
+    private final Map<Long, WebSocketSession> sessions = new ConcurrentHashMap<>();
     private final ObjectMapper mapper;
 
     public GameEventWebSocketProcessor(GameService gameService, ObjectMapper mapper) {
@@ -32,7 +32,7 @@ public class GameEventWebSocketProcessor extends GameEventProcessor {
     public void addSession(WebSocketSession session) throws Exception {
         
         //TODO When auth is set this must be done on login.
-        int playerId = sessions.size()+1;
+        long playerId = sessions.size()+1;
         gameService.setPlayerConnected(new BasicPlayer(playerId, "PLAYER_"+playerId));
         sessions.put(playerId, session);
         session.sendMessage(new TextMessage(playerId+" Session:"+session.getId()));

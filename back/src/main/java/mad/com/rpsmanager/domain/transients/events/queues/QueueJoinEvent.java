@@ -14,10 +14,10 @@ public class QueueJoinEvent extends GameManagerEvent {
     @Getter
     private final int modeId;
     @Getter
-    private final int playerId;
+    private final long playerId;
 
     @JsonCreator
-    public QueueJoinEvent(@JsonProperty("modeId") int modeId, @JsonProperty("playerId") int playerId){
+    public QueueJoinEvent(@JsonProperty("modeId") int modeId, @JsonProperty("playerId") long playerId){
        this.modeId = modeId;
        this.playerId = playerId;
     }
