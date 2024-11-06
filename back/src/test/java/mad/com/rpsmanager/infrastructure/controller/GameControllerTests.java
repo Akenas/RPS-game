@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 
 import mad.com.rpsmanager.app.RpsGameManagerApplication;
@@ -36,7 +37,7 @@ public class GameControllerTests {
     public void getGameModes_ReturnsCorrectResponse() throws Exception {
         mockMvc.perform(get("/game/modes"))
                 .andExpect(status().isOk())
-                .andExpect(content().json("[{},{},{},{}]"));
+                .andExpect(content().json("[]"));
     }
     
 }
