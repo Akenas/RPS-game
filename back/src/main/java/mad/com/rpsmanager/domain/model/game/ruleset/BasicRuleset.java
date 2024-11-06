@@ -11,10 +11,14 @@ import lombok.Data;
 @Data
 public class BasicRuleset implements Ruleset{
 
+    private int id;
+
     /**
      * The number of rounds to play in this ruleset.
      */
     private final int roundsToPlay;
+
+    private final List<RulesetOption> rulesetOptions;
 
     /**
      * Returns the list of options available in this ruleset.
@@ -23,6 +27,6 @@ public class BasicRuleset implements Ruleset{
      */
     @Override
     public List<RulesetOption> getRulesetOptions() {
-        return List.of(RulesetOption.ROCK,RulesetOption.PAPER, RulesetOption.SCISSORS);
+        return this.rulesetOptions;
     }
 }

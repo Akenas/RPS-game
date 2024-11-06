@@ -22,13 +22,13 @@ public class InMemoryGameService extends BasicGameService {
     
     
     private final Map<String, GameMatch> ongoingMatches = new ConcurrentHashMap<>();
-    private final Map<Integer, Player> connectedPlayers = new ConcurrentHashMap<>();
+    private final Map<Long, Player> connectedPlayers = new ConcurrentHashMap<>();
 
     public List<GameMode> getGameModes(){
-        return List.of(new GameMode(1,TYPE.OFFLINE,new BasicRuleset(3),"BO3 vs IA"), 
-                       new GameMode(2,TYPE.OFFLINE,new BasicRuleset(5),"BO5 vs IA"),
-                       new GameMode(3,TYPE.ONLINE,new BasicRuleset(3),"BO3 vs PLAYER"),
-                       new GameMode(4,TYPE.ONLINE,new BasicRuleset(5),"BO5 vs PLAYER"));
+        return List.of(new GameMode(1,TYPE.OFFLINE,new BasicRuleset(3, List.of(RulesetOption.ROCK, RulesetOption.PAPER, RulesetOption.SCISSORS)),"BO3 vs IA"), 
+                       new GameMode(2,TYPE.OFFLINE,new BasicRuleset(5, List.of(RulesetOption.ROCK, RulesetOption.PAPER, RulesetOption.SCISSORS)),"BO5 vs IA"),
+                       new GameMode(3,TYPE.ONLINE,new BasicRuleset(3, List.of(RulesetOption.ROCK, RulesetOption.PAPER, RulesetOption.SCISSORS)),"BO3 vs PLAYER"),
+                       new GameMode(4,TYPE.ONLINE,new BasicRuleset(5, List.of(RulesetOption.ROCK, RulesetOption.PAPER, RulesetOption.SCISSORS)),"BO5 vs PLAYER"));
     }
 
     @Override
@@ -38,7 +38,7 @@ public class InMemoryGameService extends BasicGameService {
     }
 
     @Override
-    public Optional<Player> getPlayerById(int id) {
+    public Optional<Player> getPlayerById(long id) {
         if(connectedPlayers.containsKey(id))
             return Optional.of(connectedPlayers.get(id));
         else return Optional.empty();
@@ -57,7 +57,7 @@ public class InMemoryGameService extends BasicGameService {
     }
 
     @Override
-    public boolean setPlayerDisconnected(int playerId) {
+    public boolean setPlayerDisconnected(long playerId) {
         return connectedPlayers.remove(playerId) != null;
     }
  
@@ -70,7 +70,7 @@ public class InMemoryGameService extends BasicGameService {
     }
 
     @Override
-    public Optional<GameMatch> computeMatchRound(String matchId, int playerId, int pick) {
+    public Optional<GameMatch> computeMatchRound(String matchId, long playerId, int pick) {
         GameMatch match = ongoingMatches.get(matchId);
         if(match != null){
             match.computeOngoingRound(RulesetOption.values()[pick], playerId);

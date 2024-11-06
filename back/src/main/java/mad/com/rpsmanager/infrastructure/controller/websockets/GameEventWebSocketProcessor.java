@@ -12,6 +12,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import mad.com.rpsmanager.domain.model.game.GameMatch;
 import mad.com.rpsmanager.domain.model.game.players.BasicPlayer;
+import mad.com.rpsmanager.domain.model.game.players.Player;
+import mad.com.rpsmanager.domain.model.users.User;
+import mad.com.rpsmanager.domain.repositories.PlayerRepository;
 import mad.com.rpsmanager.domain.transients.events.GameManagerEvent;
 import mad.com.rpsmanager.domain.transients.events.game.GameMatchPickEvent;
 import mad.com.rpsmanager.domain.transients.events.queues.QueueJoinEvent;
@@ -21,26 +24,51 @@ import mad.com.rpsmanager.service.game.events.GameEventProcessor;
 
 public class GameEventWebSocketProcessor extends GameEventProcessor {
     
-    private final Map<Integer, WebSocketSession> sessions = new ConcurrentHashMap<>();
+    private final Map<Long, WebSocketSession> sessions = new ConcurrentHashMap<>();
+    private final Optional<PlayerRepository> playerRepository;
     private final ObjectMapper mapper;
 
-    public GameEventWebSocketProcessor(GameService gameService, ObjectMapper mapper) {
+    public GameEventWebSocketProcessor(GameService gameService,Optional<PlayerRepository> playerRepository, ObjectMapper mapper) {
         super(gameService);
+        this.playerRepository = playerRepository;
         this.mapper = mapper;
+       
     }
 
     public void addSession(WebSocketSession session) throws Exception {
         
-        //TODO When auth is set this must be done on login.
-        int playerId = sessions.size()+1;
-        gameService.setPlayerConnected(new BasicPlayer(playerId, "PLAYER_"+playerId));
-        sessions.put(playerId, session);
-        session.sendMessage(new TextMessage(playerId+" Session:"+session.getId()));
+        User user = (User) session.getPrincipal();
+        Optional<Player>  optPlayer;
+
+        if(playerRepository.isPresent()){
+            optPlayer = playerRepository.get().findByAlias(user.getAlias());
+        }else{
+            optPlayer = Optional.of(new BasicPlayer(user.getId(), user.getAlias()));
+        }
+
+        if(optPlayer.isPresent()){
+            Player player = optPlayer.get();
+            gameService.setPlayerConnected(player);
+            sessions.put(player.getId(), session);
+        }
     }
 
     public void removeSession(WebSocketSession session) throws Exception {
         
-        //CANT REMOVE SESSION WITHOUT PRINCIPAL
+        User user = (User) session.getPrincipal();
+        Optional<Player>  optPlayer;
+
+        if(playerRepository.isPresent()){
+            optPlayer = playerRepository.get().findByAlias(user.getAlias());
+        }else{
+            optPlayer = Optional.of(new BasicPlayer(user.getId(), user.getAlias()));
+        }
+
+        if(optPlayer.isPresent()){
+            Player player = optPlayer.get();
+            gameService.setPlayerDisconnected(player.getId());
+            sessions.remove(player.getId());
+        }
     }
 
     public void transformAndAccept(TextMessage message) throws IOException{

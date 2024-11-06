@@ -11,7 +11,7 @@ public interface Player {
      *
      * @return the player's ID.
      */
-    int getId();
+    long getId();
 
      /**
      * Retrieves the alias or nickname of the player.
@@ -31,4 +31,8 @@ public interface Player {
      * Computes and updates the player's rating based on gameplay outcomes.
      */
     void computeRating();
+
+    boolean isConnected();
+
+    void setConnected(boolean connected);
 }

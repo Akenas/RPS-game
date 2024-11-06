@@ -8,17 +8,20 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 
+import lombok.RequiredArgsConstructor;
+import mad.com.rpsmanager.domain.repositories.UserRepository;
 import mad.com.rpsmanager.infrastructure.controller.AuthenticationController;
 import mad.com.rpsmanager.service.security.AuthenticationService;
-import mad.com.rpsmanager.service.security.CustomInMemoryUserDetailsManager;
 import mad.com.rpsmanager.service.security.jwt.JwtAuthenticationFilter;
 import mad.com.rpsmanager.service.security.jwt.JwtService;
 
 @Configuration
+@RequiredArgsConstructor
 public class AuthenticationConfig {
     
 
@@ -28,11 +31,15 @@ public class AuthenticationConfig {
     @Value("${security.jwt.expiration-time:3600000}")
     private long jwtExpiration;
 
+    private final UserRepository userRepository;
+
     
+
     @Bean
     public UserDetailsService userDetailsService() {
        
-        return new CustomInMemoryUserDetailsManager();
+        return username -> userRepository.findByEmail(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 
     @Bean
@@ -71,7 +78,7 @@ public class AuthenticationConfig {
     }
 
     @Bean
-    public AuthenticationService authenticationService(CustomInMemoryUserDetailsManager inMemoryUserDetailsManager, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager){
-        return new AuthenticationService(inMemoryUserDetailsManager, passwordEncoder, authenticationManager);
+    public AuthenticationService authenticationService(PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager){
+        return new AuthenticationService(userRepository, passwordEncoder, authenticationManager);
     }
 }

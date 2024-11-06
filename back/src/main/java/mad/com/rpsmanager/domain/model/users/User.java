@@ -1,34 +1,30 @@
 package mad.com.rpsmanager.domain.model.users;
 
-import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import lombok.Builder;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-
 public class User implements UserDetails{
 
-
-    private Integer id;
+    private Long id;
 
     private String alias;
 
+   
     private String email;
 
+    @JsonIgnore
     private String password;
-
-    private LocalDate createdAt;
-
-    private LocalDate updatedAt;
-
+    
     public User(String alias,String email, String password){
         this.alias = alias;
         this.email = email;

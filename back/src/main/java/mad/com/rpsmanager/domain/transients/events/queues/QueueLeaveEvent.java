@@ -14,10 +14,10 @@ public class QueueLeaveEvent extends GameManagerEvent{
     @Getter
     private final int modeId;
     @Getter
-    private final int playerId;
+    private final long playerId;
 
     @JsonCreator
-    public QueueLeaveEvent(@JsonProperty("modeId") int modeId, @JsonProperty("playerId") int playerId){
+    public QueueLeaveEvent(@JsonProperty("modeId") int modeId, @JsonProperty("playerId") long playerId){
        this.modeId = modeId;
        this.playerId = playerId;
     }

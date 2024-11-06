@@ -6,13 +6,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import lombok.RequiredArgsConstructor;
 import mad.com.rpsmanager.domain.model.users.User;
+import mad.com.rpsmanager.domain.repositories.UserRepository;
 import mad.com.rpsmanager.domain.transients.users.LoginUserDto;
 import mad.com.rpsmanager.domain.transients.users.RegisterUserDto;
 
 @RequiredArgsConstructor
 public class AuthenticationService {
     
-    private final CustomInMemoryUserDetailsManager inMemoryUserDetailsManager;
+    private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
 
@@ -20,8 +21,7 @@ public class AuthenticationService {
     public User signup(RegisterUserDto input) {
         User user = new User(input.getAlias(),input.getEmail(),passwordEncoder.encode(input.getPassword()));
             
-        inMemoryUserDetailsManager.createUser(user);
-        return (User)  inMemoryUserDetailsManager.loadUserByUsername(input.getEmail());
+        return userRepository.save(user);
     }
 
     public User authenticate(LoginUserDto input) {
@@ -32,6 +32,7 @@ public class AuthenticationService {
                 )
         );
 
-        return (User) inMemoryUserDetailsManager.loadUserByUsername(input.getEmail());
+        return userRepository.findByEmail(input.getEmail())
+                .orElseThrow();
     }
 }

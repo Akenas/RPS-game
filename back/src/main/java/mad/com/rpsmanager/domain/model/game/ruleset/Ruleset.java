@@ -16,6 +16,9 @@ public interface Ruleset {
         SCISSORS,
     }
     
+
+    int getId();
+
     /**
      * Returns the list of options available in this ruleset.
      *

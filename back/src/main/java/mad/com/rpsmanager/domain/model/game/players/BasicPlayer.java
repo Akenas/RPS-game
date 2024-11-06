@@ -3,6 +3,7 @@ package mad.com.rpsmanager.domain.model.game.players;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 /**
  * Basic implementation of the {@link Player} interface.
@@ -17,7 +18,7 @@ public class BasicPlayer implements Player {
      * Unique identifier of the player.
      */
     @Getter
-    private final int id;
+    private final long id;
 
     /**
      * Alias or nickname of the player.
@@ -30,6 +31,11 @@ public class BasicPlayer implements Player {
      */
     @Getter
     private int rating = 0;
+
+    
+    @Getter
+    @Setter
+    boolean connected;
 
     /**
      * Computes and updates the player's rating.

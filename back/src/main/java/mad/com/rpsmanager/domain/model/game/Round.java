@@ -13,6 +13,8 @@ import mad.com.rpsmanager.domain.model.game.ruleset.Ruleset.RulesetOption;
 @RequiredArgsConstructor
 public class Round {
     
+    @Getter
+    private long id;
     /**
      * The ruleset options size used for this round.
      */
@@ -33,6 +35,7 @@ public class Round {
      * The choice made by Player 1, represented as a {@link RulesetOption}.
      */
     @Setter
+    @Getter
     @JsonIgnore
     private RulesetOption player1Pick;
 
@@ -40,6 +43,7 @@ public class Round {
      * The choice made by Player 2, represented as a {@link RulesetOption}.
      */
     @Setter
+    @Getter
     @JsonIgnore
     private RulesetOption player2Pick;
 
