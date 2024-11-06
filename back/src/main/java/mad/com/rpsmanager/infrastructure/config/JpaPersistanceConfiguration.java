@@ -1,5 +1,6 @@
 package mad.com.rpsmanager.infrastructure.config;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,6 +27,7 @@ import mad.com.rpsmanager.infrastructure.persistence.jpa.repositories.JpaUserRep
 @EnableTransactionManagement(proxyTargetClass = true)
 @EnableJpaRepositories("mad.com.rpsmanager.infrastructure.persistence.jpa")
 @EntityScan("mad.com.rpsmanager.infrastructure.persistence.jpa")
+@ConditionalOnProperty(name = "com.mad.rpsmanager.persistence.enabled", havingValue = "true", matchIfMissing = false)
 public class JpaPersistanceConfiguration {
  
     
