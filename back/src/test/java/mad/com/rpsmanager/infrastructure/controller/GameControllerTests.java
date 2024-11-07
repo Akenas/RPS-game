@@ -7,12 +7,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 
 import mad.com.rpsmanager.app.RpsGameManagerApplication;
+import mad.com.rpsmanager.infrastructure.config.GameServiceConfiguration;
+import mad.com.rpsmanager.service.game.GameService;
 
 /**
  * Test class for {@link GameController}.
@@ -20,8 +24,9 @@ import mad.com.rpsmanager.app.RpsGameManagerApplication;
  * This class contains tests to verify the functionality of the endpoints in the {@link GameController}.
  * </p>
  */
-@SpringBootTest(classes = {RpsGameManagerApplication.class})
-@AutoConfigureMockMvc
+@WebMvcTest(GameController.class)
+@ContextConfiguration(classes = {GameServiceConfiguration.class})
+@TestPropertySource(properties = "com.mad.rpsmanager.persistence.enabled=false")
 public class GameControllerTests {
     
     @Autowired
@@ -37,7 +42,7 @@ public class GameControllerTests {
     public void getGameModes_ReturnsCorrectResponse() throws Exception {
         mockMvc.perform(get("/game/modes"))
                 .andExpect(status().isOk())
-                .andExpect(content().json("[]"));
+                .andExpect(content().json("[{},{},{},{}]"));
     }
     
 }
