@@ -1,3 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
 @import "primeng/resources/themes/lara-light-blue/theme.css";
-@import "primeng/resources/primeng.css";
+@import "primeflex/primeflex.css";
+
+html, body{
+    height: 100%;
+    margin: 0;
+}
+
+.control-error{
+    background-color: var(--red-100);
+    color:var(--red-900);
+    padding: .8rem;
+    text-align: center;
+    border-radius: 6px;
+}

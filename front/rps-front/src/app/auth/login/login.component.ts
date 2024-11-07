@@ -5,6 +5,9 @@ import { debounceTime } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
+import { BasicPageComponent } from '../../ui/pages/basic-page/basic-page.component';
+import { MessagesModule } from 'primeng/messages';
+import { CardModule } from 'primeng/card';
 
 let initialEmailValue = '';
 const savedForm = window.localStorage.getItem('saved-login-form');
@@ -16,7 +19,7 @@ if(savedForm){
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterModule, InputTextModule,ButtonModule],
+  imports: [ReactiveFormsModule, RouterModule, InputTextModule,ButtonModule, BasicPageComponent,MessagesModule,CardModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })

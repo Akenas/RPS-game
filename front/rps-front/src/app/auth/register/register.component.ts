@@ -1,8 +1,13 @@
-import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
+import { CardModule } from 'primeng/card';
+import { of } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
-import { debounceTime, of } from 'rxjs';
+import { BasicPageComponent } from '../../ui/pages/basic-page/basic-page.component';
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
+import { MessagesModule } from 'primeng/messages';
 
 function emailIsUnique(control: AbstractControl){
     //TODO: Check backend for unique email
@@ -25,7 +30,7 @@ function aliasIsUnique(control: AbstractControl){
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterModule], 
+  imports: [ReactiveFormsModule, RouterModule,BasicPageComponent,CardModule,InputTextModule,ButtonModule, BasicPageComponent,MessagesModule,CardModule], 
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
