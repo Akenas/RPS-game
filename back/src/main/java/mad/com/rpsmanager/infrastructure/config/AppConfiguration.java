@@ -20,32 +20,8 @@ import mad.com.rpsmanager.service.game.PersistentGameService;
  * </p>
  */
 @Configuration
-@Import({JpaPersistanceConfiguration.class, AuthenticationConfig.class,SecurityConfig.class, WebSocketConfiguration.class})
+@Import({GameServiceConfiguration.class,JpaPersistanceConfiguration.class, AuthenticationConfig.class,SecurityConfig.class, WebSocketConfiguration.class})
 public class AppConfiguration {
     
-    /**
-     * Creates and returns an instance of {@link GameController}.
-     *
-     * @return a new {@link GameController} instance
-     */
-    @Bean
-    public GameController appController(GameService service){
-        return new GameController(service);
-    }
 
-    @Bean
-    @ConditionalOnProperty(name = "com.mad.rpsmanager.persistence.enabled", havingValue = "false", matchIfMissing = true)
-    public GameService inMemoryGameService(){
-        GameService service = new InMemoryGameService();
-        service.init();
-        return service;
-    }
-
-    @Bean
-    @ConditionalOnProperty(name = "com.mad.rpsmanager.persistence.enabled", havingValue = "true", matchIfMissing = false)
-    public GameService persistentGameService(GameModeRepository gameModeRepository, PlayerRepository playerRepository, GameMatchRepository repository){
-        GameService service = new PersistentGameService(gameModeRepository, playerRepository, repository);
-        service.init();
-        return service;
-    }
 }
