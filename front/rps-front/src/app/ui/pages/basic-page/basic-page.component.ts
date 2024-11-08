@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-basic-page',
@@ -9,4 +9,5 @@ import { Component } from '@angular/core';
 })
 export class BasicPageComponent {
 
+  @Input() pageId: string = 'default-id';
 }
