@@ -36,6 +36,7 @@ function aliasIsUnique(control: AbstractControl){
 })
 export class RegisterComponent {
 
+  pageId: string = 'register-page';
   registerForm = new FormGroup(
     {
       email : new FormControl('',{

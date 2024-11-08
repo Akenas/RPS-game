@@ -24,7 +24,7 @@ if(savedForm){
   styleUrl: './login.component.css'
 })
 export class LoginComponent implements OnInit{
-
+  pageId: string = 'login-page';
   private destroyRef = inject(DestroyRef);
   private invalidCredentials = false;
   loginForm = new FormGroup(

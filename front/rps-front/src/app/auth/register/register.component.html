@@ -1,5 +1,5 @@
-<app-basic-page>
-  <div class="col-11 xl:col-3 lg:col-5 md:col-6 mx-auto">
+<app-basic-page   [pageId]="pageId">
+  <div class="col-11 md:col-6 lg:col-5 xl:col-4 mx-auto" >
     <p-card header="Sign up">
       <form (submit)="onSubmit()" [formGroup]="registerForm">
 
@@ -22,8 +22,11 @@
           </div>
         </div>
         <div class="col-12 field mb-2">
-          <button type="submit" pButton  pRipple>Register</button>
+          <button type="submit" class="glossy-button glossy-button--blue w-full">Register</button>
         </div>
+        <p class="text-center">
+          Or go back to <a href="/login">login</a>
+        </p>
       
        
         @if(emailIsInvalid){
