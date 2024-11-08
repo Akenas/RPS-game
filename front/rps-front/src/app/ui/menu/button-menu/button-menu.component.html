@@ -1,0 +1,13 @@
+<div class="card-menu">
+    <div class="col-11 md:col-6 lg:col-5 xl:col-4 mx-auto">
+        @for (item of menuOptions; track item.id) {
+            <a class="menu-link mb-3" [href]="item.link">
+                <button class="menu-item glossy-button w-full" [ngClass]="'glossy-button--' + item.color">
+                    {{ item.name }}
+                </button>
+            </a>
+        } @empty {
+            <p>There are no items.</p>
+        }
+    </div>
+  </div>
