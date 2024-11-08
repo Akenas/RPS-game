@@ -1,61 +1,54 @@
-<app-basic-page   [pageId]="pageId">
-  <div class="col-11 md:col-6 lg:col-5 xl:col-4 mx-auto" >
-    <p-card header="Sign up">
-      <form (submit)="onSubmit()" [formGroup]="registerForm">
+<form (submit)="onSubmit()" [formGroup]="registerForm">
 
-        <div class="col-12 field mb-2">
-          <label for="email">Email</label>
-          <input pInputText  type="email" name="email" formControlName="email" class="w-full" />
-        </div>
-        <div class="col-12 field mb-2">
-          <label for="alias">Alias:</label>
-          <input pInputText type="text" name="alias" formControlName="alias" class="w-full" />
-        </div>
-        <div formGroupName="passwords">
-          <div class="col-12 field mb-2">
-            <label for="password">Password</label>
-            <input pInputText  type="password" name="password" formControlName="password" class="w-full"/>
-          </div>
-          <div class="col-12 field mb-2">
-            <label>Confirm Password:</label>
-            <input pInputText type="password" formControlName="confirmPassword" class="w-full" />
-          </div>
-        </div>
-        <div class="col-12 field mb-2">
-          <button type="submit" class="glossy-button glossy-button--blue w-full">Register</button>
-        </div>
-        <p class="text-center">
-          Or go back to <a href="/login">login</a>
-        </p>
-      
-       
-        @if(emailIsInvalid){
-          <div class="col-12">
-            <p class="control-error">Please enter a valid email address</p>
-          </div>
-          
-        }
-        @if(aliasIsInvalid){
-          <div class="col-12">
-            <p class="control-error">Alias is required</p>
-          </div>
-          
-        }
-        @if(passwordIsInvalid){
-          <div class="col-12">
-            <p class="control-error">Please enter a password that is atleast 8 characters long</p>
-          </div>
-          
-        }
-        @if(passwordConfirmIsInvalid){
-          <div class="col-12">
-            <p class="control-error">Password does not match</p>
-          </div>
-          
-        }
-      </form>
-    </p-card>
-    
+  <div class="col-12 field mb-2">
+    <label for="email">Email</label>
+    <input pInputText  type="email" name="email" formControlName="email" class="w-full" />
   </div>
-</app-basic-page>
+  <div class="col-12 field mb-2">
+    <label for="alias">Alias:</label>
+    <input pInputText type="text" name="alias" formControlName="alias" class="w-full" />
+  </div>
+  <div formGroupName="passwords">
+    <div class="col-12 field mb-2">
+      <label for="password">Password</label>
+      <input pInputText  type="password" name="password" formControlName="password" class="w-full"/>
+    </div>
+    <div class="col-12 field mb-2">
+      <label>Confirm Password:</label>
+      <input pInputText type="password" formControlName="confirmPassword" class="w-full" />
+    </div>
+  </div>
+  <div class="col-12 field mb-2">
+    <button type="submit" class="glossy-button glossy-button--blue w-full">Register</button>
+  </div>
+  <p class="text-center">
+    Or go back to <a href="/login">login</a>
+  </p>
+
+  
+  @if(emailIsInvalid){
+    <div class="col-12">
+      <p class="control-error">Please enter a valid email address</p>
+    </div>
+    
+  }
+  @if(aliasIsInvalid){
+    <div class="col-12">
+      <p class="control-error">Alias is required</p>
+    </div>
+    
+  }
+  @if(passwordIsInvalid){
+    <div class="col-12">
+      <p class="control-error">Please enter a password that is atleast 8 characters long</p>
+    </div>
+    
+  }
+  @if(passwordConfirmIsInvalid){
+    <div class="col-12">
+      <p class="control-error">Password does not match</p>
+    </div>
+    
+  }
+</form>
 

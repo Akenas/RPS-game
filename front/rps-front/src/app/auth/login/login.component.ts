@@ -18,13 +18,12 @@ if(savedForm){
 
 @Component({
   selector: 'app-login',
-  standalone: true,
-  imports: [ReactiveFormsModule, RouterModule, InputTextModule,ButtonModule, BasicPageComponent,MessagesModule,CardModule],
+  standalone: false,
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent implements OnInit{
-  pageId: string = 'login-page';
+ 
   private destroyRef = inject(DestroyRef);
   private invalidCredentials = false;
   loginForm = new FormGroup(

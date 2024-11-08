@@ -29,14 +29,12 @@ function aliasIsUnique(control: AbstractControl){
 
 @Component({
   selector: 'app-register',
-  standalone: true,
-  imports: [ReactiveFormsModule, RouterModule,BasicPageComponent,CardModule,InputTextModule,ButtonModule, BasicPageComponent,MessagesModule,CardModule], 
+  standalone: false,
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
 
-  pageId: string = 'register-page';
   registerForm = new FormGroup(
     {
       email : new FormControl('',{

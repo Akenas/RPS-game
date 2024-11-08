@@ -2,8 +2,7 @@ import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-basic-page',
-  standalone: true,
-  imports: [],
+  standalone: false,
   templateUrl: './basic-page.component.html',
   styleUrl: './basic-page.component.css'
 })

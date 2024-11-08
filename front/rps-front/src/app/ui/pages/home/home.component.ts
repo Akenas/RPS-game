@@ -1,15 +1,12 @@
 import { Component } from '@angular/core';
-import { BasicPageComponent } from '../basic-page/basic-page.component';
-import { CardMenuComponent } from "../../menu/button-menu/button-menu.component";
 
 @Component({
   selector: 'app-home',
-  standalone: true,
-  imports: [BasicPageComponent, CardMenuComponent],
+  standalone: false,
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent {
+export class HomePageComponent {
   pageId :string = "home-page"
   menuOptionsArray = [
     { id: 1, name: 'Play', link: '/play', color: "green" },
