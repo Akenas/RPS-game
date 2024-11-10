@@ -5,6 +5,9 @@
 html, body{
     height: 100%;
     margin: 0;
+    max-width: 1440px;
+    margin: 0 auto;
+    background-color: #000;
 }
 
 .control-error{
@@ -23,6 +26,12 @@ html, body{
     background-image: url("/images/home-back.jpg");
     background-size: cover;
     background-position: center center;
+}
+
+#play-page{
+  background-image: url("/images/game-back.jpg");
+  background-size: cover;
+  background-position: center center;
 }
 
 .glossy-button {
@@ -80,4 +89,16 @@ html, body{
       /* multiple light sources yall */
       -12px 12px 5px hsla(0, 0%, 0%, 0.15), /* drop shadow 1 */
       10px 25px 10px hsla(0, 0%, 0%, 0.2); /* drop shadow 2 */
+  }
+  .glossy-button.disabled{
+    background-color: #AAA;
+  }
+  .glossy-button.disabled:hover {
+    transform: none;
+    box-shadow:
+    inset 0 -5px 20px hsla(0, 0%, 0%, 0.4), /* top light */
+    inset 0 5px 20px hsla(0, 0%, 100%, 0.4), /* bottom shadow */
+    /* multiple light sources yall */
+    -8px 8px 5px hsla(0, 0%, 0%, 0.15), /* drop shadow 1 */
+    5px 18px 10px hsla(0, 0%, 0%, 0.2); /* drop shadow 2 */
   }

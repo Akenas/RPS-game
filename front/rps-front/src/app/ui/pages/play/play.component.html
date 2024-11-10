@@ -1,0 +1,7 @@
+<app-basic-page  [pageId]="pageId">
+    @if(selectedMode == undefined){
+        <app-mode-menu [menuOptions] ="modes" (modeSelected)="handleModeSelected($event)"/>
+    }
+</app-basic-page>
+
+
