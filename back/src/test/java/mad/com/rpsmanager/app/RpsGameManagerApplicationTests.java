@@ -2,11 +2,7 @@ package mad.com.rpsmanager.app;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Profile;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.TestPropertySource;
-
-import mad.com.rpsmanager.infrastructure.config.AppConfiguration;
 
 /**
  * Test class for the Rock Paper Scissors Game Manager application.

@@ -29,11 +29,12 @@ public class GameEventWebSocketProcessor extends GameEventProcessor {
     public void visit(QueueJoinEvent event) throws IOException {
        
         Optional<GameMatch> optMatch = gameService.queuePlayer(event.getPlayerId(), event.getModeId());
-        String topicPath = "/queue/" + event.getModeId();
-
+        
         if(optMatch.isPresent()){
-            GameMatch match = optMatch.get();   
-            messagingTemplate.convertAndSend(topicPath, mapper.writeValueAsString(match));
+            GameMatch match = optMatch.get();  
+            String topicPath = "/queue/";
+            messagingTemplate.convertAndSend(topicPath+match.getPlayer1().getId(), mapper.writeValueAsString(match));
+            messagingTemplate.convertAndSend(topicPath+match.getPlayer2().getId(), mapper.writeValueAsString(match));
         }
     }
 
@@ -41,7 +42,7 @@ public class GameEventWebSocketProcessor extends GameEventProcessor {
     public void visit(QueueLeaveEvent event) throws IOException {
         
         boolean result = gameService.removePlayerFromQueue(event.getPlayerId(), event.getModeId());
-        String topicPath = "/queue/" + event.getModeId();
+        String topicPath = "/queue/" + event.getPlayerId();
         messagingTemplate.convertAndSend(topicPath, mapper.writeValueAsString(result));
 
     }

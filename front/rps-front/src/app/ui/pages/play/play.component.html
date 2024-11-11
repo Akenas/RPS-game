@@ -1,7 +1,11 @@
 <app-basic-page  [pageId]="pageId">
-    @if(selectedMode == undefined){
+    @if(!selectedMode){
         <app-mode-menu [menuOptions] ="modes" (modeSelected)="handleModeSelected($event)"/>
     }
+    @if(selectedMode && !match){
+       <app-queue-controller (queueCancelled)="handleCancelQueue()"></app-queue-controller> 
+    }
+    
 </app-basic-page>
 
 

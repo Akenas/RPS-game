@@ -8,6 +8,8 @@ import { LoginPageComponent } from './login/login.component';
 import { RegisterPageComponent } from './register/register.component';
 import { PlayPageComponent } from './play/play.component';
 import { ModeMenuComponent } from '../menu/mode-menu/mode-menu.component';
+import { QueueControllerComponent } from "../game/queue-controller/queue-controller.component";
+import { GameComponent } from "../game/game.component";
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { ModeMenuComponent } from '../menu/mode-menu/mode-menu.component';
     CardMenuComponent,
     AuthModule,
     CardModule,
-    ModeMenuComponent
+    ModeMenuComponent,
+    QueueControllerComponent
 ],
   exports: [
     HomePageComponent,

@@ -71,7 +71,7 @@ public class PersistentGameService extends BasicGameService{
     @Override
     protected GameMatch createGameMatch(Player player, Player opponent, GameMode mode) {
         GameMatch match = new GameMatch(player, opponent, mode);
-        return gameMatchRepository.save(match);
+        return gameMatchRepository.save(match.start().then().createRound());
     }
 
     @Override

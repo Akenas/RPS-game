@@ -1,9 +1,9 @@
 package mad.com.rpsmanager.infrastructure.controller;
 
-import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,8 +39,8 @@ public class GameController {
     }
 
     @GetMapping("/player")
-    public Optional<Player> getPlayerData(Principal principal){
-        User user = (User) principal;
+    public Optional<Player> getPlayerData(Authentication auth){
+        User user = (User) auth.getPrincipal();
         return service.getPlayerByAlias(user.getAlias());
     }
 
