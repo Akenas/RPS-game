@@ -6,6 +6,7 @@ import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import mad.com.rpsmanager.domain.model.game.GameMatch;
 import mad.com.rpsmanager.domain.model.game.GameMode;
+import mad.com.rpsmanager.domain.model.game.players.BasicPlayer;
 import mad.com.rpsmanager.domain.model.game.players.Player;
 import mad.com.rpsmanager.domain.model.game.ruleset.Ruleset.RulesetOption;
 import mad.com.rpsmanager.domain.repositories.GameMatchRepository;
@@ -82,6 +83,14 @@ public class PersistentGameService extends BasicGameService{
     protected Optional<Player> getPlayerById(long id) {
        return playerRepository.findById(id);
     }
-    
-   
+
+    @Override
+    public Optional<Player> getPlayerByAlias(String alias) {
+        return playerRepository.findByAlias(alias);
+    }
+
+    @Override
+    public Player createPlayer(String alias) {
+       return playerRepository.save(new BasicPlayer(0,alias)); 
+    }
 }

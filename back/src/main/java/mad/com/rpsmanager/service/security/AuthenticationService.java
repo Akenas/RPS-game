@@ -35,4 +35,12 @@ public class AuthenticationService {
         return userRepository.findByEmail(input.getEmail())
                 .orElseThrow();
     }
+
+    public boolean existsUserByEmail(String email){
+        return userRepository.existsByEmail(email);
+    }
+
+    public boolean existsUserByAlias(String alias){
+        return userRepository.existsByAlias(alias);
+    }
 }

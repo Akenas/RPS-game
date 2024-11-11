@@ -16,6 +16,7 @@ import org.springframework.web.servlet.HandlerExceptionResolver;
 import lombok.RequiredArgsConstructor;
 import mad.com.rpsmanager.domain.repositories.UserRepository;
 import mad.com.rpsmanager.infrastructure.controller.AuthenticationController;
+import mad.com.rpsmanager.service.game.GameService;
 import mad.com.rpsmanager.service.security.AuthenticationService;
 import mad.com.rpsmanager.service.security.jwt.JwtAuthenticationFilter;
 import mad.com.rpsmanager.service.security.jwt.JwtService;
@@ -32,7 +33,6 @@ public class AuthenticationConfig {
     private long jwtExpiration;
 
     private final UserRepository userRepository;
-
     
 
     @Bean
@@ -73,8 +73,8 @@ public class AuthenticationConfig {
     }
 
     @Bean
-    public AuthenticationController authenticationController(JwtService jwtService, AuthenticationService authenticationService){
-        return new AuthenticationController(jwtService, authenticationService);
+    public AuthenticationController authenticationController(JwtService jwtService, AuthenticationService authenticationService,  GameService gameService){
+        return new AuthenticationController(jwtService, authenticationService,gameService);
     }
 
     @Bean

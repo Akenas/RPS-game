@@ -10,6 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import mad.com.rpsmanager.domain.model.game.GameMatch;
 import mad.com.rpsmanager.domain.model.game.GameMode;
 import mad.com.rpsmanager.domain.model.game.GameMode.TYPE;
+import mad.com.rpsmanager.domain.model.game.players.BasicPlayer;
 import mad.com.rpsmanager.domain.model.game.players.Player;
 import mad.com.rpsmanager.domain.model.game.ruleset.BasicRuleset;
 import mad.com.rpsmanager.domain.model.game.ruleset.Ruleset.RulesetOption;
@@ -23,6 +24,7 @@ public class InMemoryGameService extends BasicGameService {
     
     private final Map<String, GameMatch> ongoingMatches = new ConcurrentHashMap<>();
     private final Map<Long, Player> connectedPlayers = new ConcurrentHashMap<>();
+    private final Map<Long, Player> existingPlayers = new ConcurrentHashMap<>();
 
     public List<GameMode> getGameModes(){
         return List.of(new GameMode(1,TYPE.OFFLINE,new BasicRuleset(3, List.of(RulesetOption.ROCK, RulesetOption.PAPER, RulesetOption.SCISSORS)),"BO3 vs IA"), 
@@ -39,8 +41,8 @@ public class InMemoryGameService extends BasicGameService {
 
     @Override
     public Optional<Player> getPlayerById(long id) {
-        if(connectedPlayers.containsKey(id))
-            return Optional.of(connectedPlayers.get(id));
+        if(existingPlayers.containsKey(id))
+            return Optional.of(existingPlayers.get(id));
         else return Optional.empty();
     }
 
@@ -80,5 +82,19 @@ public class InMemoryGameService extends BasicGameService {
             return Optional.of(match);
         } else return Optional.empty();
 
+    }
+
+    @Override
+    public Optional<Player> getPlayerByAlias(String alias) {
+        return connectedPlayers.values().stream().filter(p-> p.getAlias().equals(alias)).findFirst();
+    }
+
+    @Override
+    public Player createPlayer(String alias) {
+        long id = existingPlayers.size() +1;
+        Player player = new BasicPlayer(id, alias);
+        existingPlayers.put(id, player);
+
+        return player;
     }
 }

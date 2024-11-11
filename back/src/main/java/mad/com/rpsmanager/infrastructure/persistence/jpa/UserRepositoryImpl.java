@@ -35,4 +35,14 @@ public class UserRepositoryImpl implements UserRepository {
     public Optional<User> findById(Long id) {
         return jpaUserRepository.findById(id).map(UserMapper.INSTANCE::toDomain);
     }
+
+    @Override
+    public boolean existsByEmail(String email) {
+        return jpaUserRepository.existsByEmail(email);
+    }
+
+    @Override
+    public boolean existsByAlias(String alias) {
+        return jpaUserRepository.existsByAlias(alias);
+    }
 }
