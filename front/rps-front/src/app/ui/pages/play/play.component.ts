@@ -24,6 +24,12 @@ export class PlayPageComponent {
 
   ngOnInit(): void {
     
+    const savedMatch = localStorage.getItem('savedMatch');
+    if (savedMatch) {
+      this.match = JSON.parse(savedMatch);
+      this.selectedMode = this.match!.mode;
+    }
+    
     this.gameService.getGameModes().subscribe({
       next: (data: ModeOption[]) => {
         this.modes = data;
@@ -42,6 +48,7 @@ export class PlayPageComponent {
     this.selectedMode = item;
     this.gameService.queuePlayer(this.player!.id, this.selectedMode.id).subscribe(match => {
       this.match = match; 
+      localStorage.setItem('savedMatch', JSON.stringify(match));
     });
   }
 

@@ -1,11 +1,14 @@
 <app-basic-page  [pageId]="pageId">
+    
     @if(!selectedMode){
         <app-mode-menu [menuOptions] ="modes" (modeSelected)="handleModeSelected($event)"/>
     }
     @if(selectedMode && !match){
        <app-queue-controller (queueCancelled)="handleCancelQueue()"></app-queue-controller> 
     }
-    
+    @if(match){
+        <app-game [match]="match"></app-game>
+    }
 </app-basic-page>
 
 

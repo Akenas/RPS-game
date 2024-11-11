@@ -1,0 +1,36 @@
+.round-visor{
+    width: 25px;
+    height: 25px;
+    background-color: #AAA;
+    background-image: linear-gradient( /* chrome */
+      hsla(0, 0%, 100%, 0.6), hsla(0, 0%, 100%, 0) 50%,
+      hsla(0, 0%, 100%, 0.2)
+    );
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0 10px;
+    position: relative;
+    border: 1px solid ;
+    box-shadow:
+      inset 0 -5px 20px hsla(0, 0%, 0%, 0.4), /* top light */
+      inset 0 5px 20px hsla(0, 0%, 100%, 0.4), /* bottom shadow */
+      /* multiple light sources yall */
+      -8px 8px 5px hsla(0, 0%, 0%, 0.15), /* drop shadow 1 */
+}
+
+.round-visor:before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    top: 5px;
+    height: 30px;
+    border-radius: 15px;
+    background: linear-gradient(
+      hsla(0, 0%, 100%, 0.8), hsla(0, 0%, 100%, 0) );
+}
+
+.round-visor.wp1 { background-color: var(--blue-500); }
+.round-visor.tie { background-color: var(--yelow-500) }
+.round-visor.wp2 { background-color: var(--red-500) }

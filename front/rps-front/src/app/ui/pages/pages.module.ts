@@ -24,7 +24,8 @@ import { GameComponent } from "../game/game.component";
     AuthModule,
     CardModule,
     ModeMenuComponent,
-    QueueControllerComponent
+    QueueControllerComponent,
+    GameComponent
 ],
   exports: [
     HomePageComponent,

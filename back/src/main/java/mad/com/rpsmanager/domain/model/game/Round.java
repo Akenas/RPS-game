@@ -29,7 +29,7 @@ public class Round {
      * 2 if Player 2 wins.
      */
     @Getter
-    private int winner;
+    private int winner = -1;
 
     /**
      * The choice made by Player 1, represented as a {@link RulesetOption}.

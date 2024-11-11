@@ -1,0 +1,9 @@
+<div class="roun-visor-panel">
+    <p class="text-center">ROUNDS</p>
+    <div class="round-visor-wrapper flex flex-row justify-content-center">
+        @for(round of [].constructor(roundsToPlay); track round; let index = $index){
+            <div class="round-visor" [ngClass]="getRoundClass(rounds[index]?.winner)"></div>
+           }
+    </div>
+</div>
+
