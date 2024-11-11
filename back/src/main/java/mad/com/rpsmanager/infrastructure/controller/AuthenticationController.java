@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
-import mad.com.rpsmanager.domain.model.game.players.Player;
 import mad.com.rpsmanager.domain.model.users.User;
 import mad.com.rpsmanager.domain.transients.users.LoginResponse;
 import mad.com.rpsmanager.domain.transients.users.LoginUserDto;

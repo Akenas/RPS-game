@@ -3,7 +3,7 @@ import { Player } from "./player.model";
 import { Round } from "./roud.model";
 
 export interface GameMatch {
-    id: number;
+    id: string;
     player1: Player;
     player2: Player;
     mode: ModeOption;

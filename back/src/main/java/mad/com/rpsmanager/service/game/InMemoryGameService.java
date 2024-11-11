@@ -94,7 +94,7 @@ public class InMemoryGameService extends BasicGameService {
         long id = existingPlayers.size() +1;
         Player player = new BasicPlayer(id, alias);
         existingPlayers.put(id, player);
-
+        setPlayerConnected(player);
         return player;
     }
 }

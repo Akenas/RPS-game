@@ -49,6 +49,7 @@ export class PlayPageComponent {
     this.gameService.queuePlayer(this.player!.id, this.selectedMode.id).subscribe(match => {
       this.match = match; 
       localStorage.setItem('savedMatch', JSON.stringify(match));
+      this.handleMatchSubscription(this.match);
     });
   }
 
@@ -56,4 +57,14 @@ export class PlayPageComponent {
     this.gameService.unqueuePlayer(this.player!.id, this.selectedMode!.id);
     this.selectedMode = null
   }
+
+  handleMatchSubscription(match: GameMatch) {
+    this.gameService.subscribeToMatch(match.id).subscribe(updatedMatch => {
+      this.match = updatedMatch;
+      localStorage.setItem('savedMatch', JSON.stringify(updatedMatch));
+    });
+  }
+
 }
+
+

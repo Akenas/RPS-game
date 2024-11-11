@@ -76,8 +76,31 @@ export class GameService {
     }
   }
 
-  subscribeToMatch(matchId : number): void {
+  subscribeToMatch(matchId: string): Observable<GameMatch> {
+    return new Observable<GameMatch>((observer) => {
+      const subscription = this.connection?.subscribe(`/match/${matchId}`, (message) => {
+        const matchUpdate: GameMatch = JSON.parse(message.body);
+        observer.next(matchUpdate);
+      });
 
-    this.connection?.subscribe("/match/"+matchId, (message) => console.log(message))
+      return () => {
+        subscription?.unsubscribe();
+      };
+    });
+  }
+
+  sendMatchRoundPick(optionId: number, matchId: string): void {
+    this.currentPlayerSubject.subscribe((player) => {
+      const playerId = player?.id;
+      if (playerId && this.connection?.connected) {
+        const event = {
+          type: 'match-pick',
+          playerId: playerId,
+          optionId: optionId,
+          matchId: matchId
+        };
+        this.connection.send('/app/match/pick', {}, JSON.stringify(event));
+      }
+    }).unsubscribe(); // Unsubscribe immediately to avoid keeping the subscription open
   }
 }

@@ -1,3 +1,4 @@
 <div class="col-11 md:col-8 lg:col-8 xl:col-8 mx-auto">
     <app-rounds-visor [roundsToPlay]="match!.mode!.ruleset.roundsToPlay" [rounds]="match!.rounds"/>
+    <app-option-picker [availableOptions]="match!.mode!.ruleset.rulesetOptions" (optionLocked)="handleOptionLocked($event)"/>
 </div>

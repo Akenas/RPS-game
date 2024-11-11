@@ -1,6 +1,6 @@
 .round-visor{
-    width: 25px;
-    height: 25px;
+    width: 30px;
+    height: 30px;
     background-color: #AAA;
     background-image: linear-gradient( /* chrome */
       hsla(0, 0%, 100%, 0.6), hsla(0, 0%, 100%, 0) 50%,

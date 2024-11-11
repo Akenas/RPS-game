@@ -49,7 +49,7 @@ public class InMemoryGameServiceTests {
         
         GameService service = new InMemoryGameService();
         service.init();
-        service.setPlayerConnected(PLAYER_1);
+        service.createPlayer(PLAYER_1.getAlias());
 
         service.queuePlayer(PLAYER_1.getId(),ONLINE_MODE.getId());
         boolean rs = service.removePlayerFromQueue(PLAYER_1.getId(),ONLINE_MODE.getId());
@@ -73,8 +73,8 @@ public class InMemoryGameServiceTests {
 
         GameService service = new InMemoryGameService();
         service.init();
-        service.setPlayerConnected(PLAYER_1);
-        service.setPlayerConnected(PLAYER_2);
+        service.createPlayer(PLAYER_1.getAlias());
+        service.createPlayer(PLAYER_2.getAlias());
 
         Optional<GameMatch> optMatch1 =service.queuePlayer(PLAYER_1.getId(), ONLINE_MODE.getId());
         Optional<GameMatch> optMatch2 = service.queuePlayer(PLAYER_2.getId(), ONLINE_MODE.getId());
