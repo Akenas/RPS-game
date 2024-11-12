@@ -1,0 +1,26 @@
+.mode-option{
+    box-sizing: border-box;
+    padding: 8px;
+    color: var(--yellow-500);
+    font-size: 22px;
+    font-family: sans-serif;
+    font-weight: bold;
+    color: var(--yellow-500);
+    padding: 20px 40px;
+    text-shadow:
+      0 2px 4px hsla(0, 0%, 0%, 0.7); /* drop shadow */
+      border: 5px solid #00000000
+
+}
+.mode-item{
+    cursor: pointer;
+}
+.mode-item.selected .mode-option{
+    border: 5px solid #2BB5D9
+}
+.vs-ia{
+    background-image: url("/images/vsIA.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}

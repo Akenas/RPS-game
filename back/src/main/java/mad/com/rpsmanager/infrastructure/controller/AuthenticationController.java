@@ -11,6 +11,7 @@ import mad.com.rpsmanager.domain.model.users.User;
 import mad.com.rpsmanager.domain.transients.users.LoginResponse;
 import mad.com.rpsmanager.domain.transients.users.LoginUserDto;
 import mad.com.rpsmanager.domain.transients.users.RegisterUserDto;
+import mad.com.rpsmanager.service.game.GameService;
 import mad.com.rpsmanager.service.security.AuthenticationService;
 import mad.com.rpsmanager.service.security.jwt.JwtService;
 
@@ -22,12 +23,20 @@ public class AuthenticationController {
     private final JwtService jwtService;
 
     private final AuthenticationService authenticationService;
+    private final GameService gameService;
 
     @PostMapping("/signup")
     public ResponseEntity<User> register(@RequestBody RegisterUserDto registerUserDto) {
-        User registeredUser = authenticationService.signup(registerUserDto);
 
-        return ResponseEntity.ok(registeredUser);
+        if(!authenticationService.existsUserByAlias(registerUserDto.getAlias()) && !authenticationService.existsUserByEmail(registerUserDto.getEmail())){
+            User registeredUser = authenticationService.signup(registerUserDto);
+            gameService.createPlayer(registeredUser.getAlias());
+
+            return ResponseEntity.ok(registeredUser);
+        }else{
+            return ResponseEntity.badRequest().build();
+        }
+        
     }
 
     @PostMapping("/login")

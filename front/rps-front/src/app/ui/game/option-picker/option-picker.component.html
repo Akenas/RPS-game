@@ -1,0 +1,18 @@
+<div class="option-picker-panel col-11 md:col-8 lg:col-8 xl:col-8 mx-auto">
+    <div class="option-picker-wrapper flex flex-row justify-content-center">
+        @for(option of availableOptions; track option; let index = $index){
+            <div class="option"  [class]="option"   
+                [ngClass]="{'selected': selectedOptionIndex === index}"
+                [attr.data-option-id]="index"
+                (click)="selectOption(index)"
+            >
+                
+            </div>
+           }
+    </div>
+    <div class="col-11 md:col-8 lg:col-6 xl:col-6 mx-auto mt-4">
+        <button (click)="lockSelection()"  class="glossy-button w-full" [ngClass]="{'glossy-button--green': !isLockEnabled}" [disabled]="isLockEnabled" ><span>Lock Selection</span></button>
+    </div>
+</div>
+
+

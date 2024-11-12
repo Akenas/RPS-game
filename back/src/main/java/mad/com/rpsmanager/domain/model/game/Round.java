@@ -1,7 +1,5 @@
 package mad.com.rpsmanager.domain.model.game;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -14,6 +12,7 @@ import mad.com.rpsmanager.domain.model.game.ruleset.Ruleset.RulesetOption;
 public class Round {
     
     @Getter
+    @Setter
     private long id;
     /**
      * The ruleset options size used for this round.
@@ -21,6 +20,7 @@ public class Round {
     private final int rulesetOptionsSize;
 
     @Getter
+    @Setter
     private boolean completed;
     /**
      * The result of the round, represented as an integer:
@@ -29,14 +29,14 @@ public class Round {
      * 2 if Player 2 wins.
      */
     @Getter
-    private int winner;
+    @Setter
+    private int winner = -1;
 
     /**
      * The choice made by Player 1, represented as a {@link RulesetOption}.
      */
     @Setter
     @Getter
-    @JsonIgnore
     private RulesetOption player1Pick;
 
     /**
@@ -44,7 +44,6 @@ public class Round {
      */
     @Setter
     @Getter
-    @JsonIgnore
     private RulesetOption player2Pick;
 
     /**
@@ -63,7 +62,7 @@ public class Round {
         } else {
             winner = 2;
         }
-        this.completed = true;
+        this.completed = winner != 0;
         return this.winner;
     }
 

@@ -1,0 +1,15 @@
+<div class="col-11 md:col-8 lg:col-8 xl:col-8 mx-auto">
+    <div class="grid">
+        @for (item of menuOptions; track item.id) {
+            <div class="col-12 md:col-6">
+                <button class="glossy-button w-full" (click)="selectMode(item)" [ngClass]="{'glossy-button--blue': selectedMode?.id === item.id}">{{ item.name }}</button>
+            </div>
+        } @empty {
+            <p>There are no items.</p>
+        }
+       
+    </div>
+    <div class="col-12">
+        <button class="glossy-button glossy-button--green w-full" (click)="queueMode()" [ngClass]="{'disabled': selectedMode == null}"><span>Queue</span></button>
+    </div>
+</div>

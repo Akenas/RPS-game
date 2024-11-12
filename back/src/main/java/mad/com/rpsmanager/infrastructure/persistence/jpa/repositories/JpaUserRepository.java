@@ -10,5 +10,6 @@ public interface JpaUserRepository extends CrudRepository<JpaUserEntity, Long> {
     
     Optional<JpaUserEntity> findByEmail(String email);
     Optional<JpaUserEntity> findByAlias(String alias);
-
+    boolean existsByEmail(String email);
+    boolean existsByAlias(String alias);
 }

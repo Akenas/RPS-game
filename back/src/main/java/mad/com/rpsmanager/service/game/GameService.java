@@ -48,6 +48,9 @@ public interface GameService {
     boolean setPlayerConnected(Player player);
     boolean setPlayerDisconnected(long playerId);
     List<Player> getConnectedPlayers();
-
+    Optional<Player> getPlayerByAlias(String alias);
+    Player createPlayer(String alias);
     Optional<GameMatch> computeMatchRound(String matchId, long playerId, int pick);
+
+    public Optional<GameMatch> forfeitMatch(String matchId, long playerId);
 }

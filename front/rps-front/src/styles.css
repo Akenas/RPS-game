@@ -1,0 +1,126 @@
+/* You can add global styles to this file, and also import other style files */
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeflex/primeflex.css";
+@import "primeicons/primeicons.css";
+
+html, body{
+    height: 100%;
+    margin: 0;
+    max-width: 1440px;
+    margin: 0 auto;
+    background-color: #000;
+}
+
+.control-error{
+    background-color: var(--red-100);
+    color:var(--red-900);
+    padding: .8rem;
+    text-align: center;
+    border-radius: 6px;
+}
+
+#login-page,#register-page{
+    background-image: url("/images/main-back.jpg");
+    background-size: cover;
+}
+#home-page{
+    background-image: url("/images/home-back.jpg");
+    background-size: cover;
+    background-position: center center;
+}
+
+#play-page{
+  background-image: url("/images/game-back.jpg");
+  background-size: cover;
+  background-position: center center;
+}
+
+.title{
+  text-align: center;
+  font-size: 2em;
+  font-family: sans-serif;
+  font-weight: bold;
+  color: white;
+  text-shadow:
+      0 2px 4px hsla(0, 0%, 0%, 0.7); /* drop shadow */
+}
+.glossy-button.small{
+  padding: 10px 20px;
+  font-size: 18px;
+}
+.glossy-button.small:before {
+  content: "";
+    display: block;
+    position: absolute;
+    left: 8px;
+    right: 8px;
+    top: 4px;
+    height: 15px;
+    border-radius: 15px;
+    background: linear-gradient(hsla(0, 0%, 100%, 0.8), hsla(0, 0%, 100%, 0));
+}
+
+.glossy-button {
+    display: inline-block;
+    position: relative;
+    background-color: #AAA;
+    font-size: 22px;
+    font-family: sans-serif;
+    font-weight: bold;
+    color: white;
+    padding: 20px 40px;
+    text-shadow:
+      0 0 15px hsla(0, 0%, 100%, 1), /* bloom */
+      0 2px 4px hsla(0, 0%, 0%, 0.7); /* drop shadow */
+    border: none;
+    border-radius: 50px;
+    box-shadow:
+      inset 0 -5px 20px hsla(0, 0%, 0%, 0.4), /* top light */
+      inset 0 5px 20px hsla(0, 0%, 100%, 0.4), /* bottom shadow */
+      /* multiple light sources yall */
+      -8px 8px 5px hsla(0, 0%, 0%, 0.15), /* drop shadow 1 */
+      5px 18px 10px hsla(0, 0%, 0%, 0.2); /* drop shadow 2 */
+    cursor: pointer;
+    transition: transform 0.1s, box-shadow 0.1s;
+  }
+  
+  /* highlight */
+  .glossy-button:before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    top: 5px;
+    height: 30px;
+    border-radius: 15px;
+    background: linear-gradient(
+      hsla(0, 0%, 100%, 0.8), hsla(0, 0%, 100%, 0) );
+  }
+  
+  .glossy-button--blue { background-color: var(--blue-500); }
+  .glossy-button--gold { background-color: var(--yelow-500) }
+  .glossy-button--green { background-color: var(--green-500) }
+  .glossy-button--red { background-color: var(--red-500) }
+  
+  .glossy-button:hover {
+    transform: scale(1.05);
+    box-shadow:
+      inset 0 -5px 20px hsla(0, 0%, 0%, 0.4), /* top light */
+      inset 0 5px 20px hsla(0, 0%, 100%, 0.4), /* bottom shadow */
+      /* multiple light sources yall */
+      -12px 12px 5px hsla(0, 0%, 0%, 0.15), /* drop shadow 1 */
+      10px 25px 10px hsla(0, 0%, 0%, 0.2); /* drop shadow 2 */
+  }
+  .glossy-button.disabled{
+    background-color: #AAA;
+  }
+  .glossy-button.disabled:hover {
+    transform: none;
+    box-shadow:
+    inset 0 -5px 20px hsla(0, 0%, 0%, 0.4), /* top light */
+    inset 0 5px 20px hsla(0, 0%, 100%, 0.4), /* bottom shadow */
+    /* multiple light sources yall */
+    -8px 8px 5px hsla(0, 0%, 0%, 0.15), /* drop shadow 1 */
+    5px 18px 10px hsla(0, 0%, 0%, 0.2); /* drop shadow 2 */
+  }

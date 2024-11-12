@@ -6,6 +6,7 @@ import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import mad.com.rpsmanager.domain.model.game.GameMatch;
 import mad.com.rpsmanager.domain.model.game.GameMode;
+import mad.com.rpsmanager.domain.model.game.players.BasicPlayer;
 import mad.com.rpsmanager.domain.model.game.players.Player;
 import mad.com.rpsmanager.domain.model.game.ruleset.Ruleset.RulesetOption;
 import mad.com.rpsmanager.domain.repositories.GameMatchRepository;
@@ -58,7 +59,7 @@ public class PersistentGameService extends BasicGameService{
             GameMatch match = optMatch.get();
             match.computeOngoingRound(RulesetOption.values()[pick], playerId);
            
-            if(match.isOngoing())
+            if(match.isOngoing() && !match.hasOngoingRound())
                 match.createRound(); 
 
             match = gameMatchRepository.save(match);
@@ -70,7 +71,7 @@ public class PersistentGameService extends BasicGameService{
     @Override
     protected GameMatch createGameMatch(Player player, Player opponent, GameMode mode) {
         GameMatch match = new GameMatch(player, opponent, mode);
-        return gameMatchRepository.save(match);
+        return gameMatchRepository.save(match.start().then().createRound());
     }
 
     @Override
@@ -82,6 +83,32 @@ public class PersistentGameService extends BasicGameService{
     protected Optional<Player> getPlayerById(long id) {
        return playerRepository.findById(id);
     }
-    
-   
+
+    @Override
+    public Optional<Player> getPlayerByAlias(String alias) {
+        return playerRepository.findByAlias(alias);
+    }
+
+    @Override
+    public Player createPlayer(String alias) {
+       return playerRepository.save(new BasicPlayer(0,alias)); 
+    }
+
+    @Override
+    public Optional<GameMatch> forfeitMatch(String matchId, long playerId) {
+        Optional<GameMatch> optMatch = gameMatchRepository.findById(matchId);
+
+        if(optMatch.isPresent()){
+            GameMatch match = optMatch.get();
+            if(match.getPlayer1().getId() == playerId){
+                match.setWinner(2);
+            }else{
+                match.setWinner(1);
+            }
+            match.finish();
+            match = gameMatchRepository.save(match);
+            return Optional.of(match);
+
+        }else return Optional.empty();
+    }
 }

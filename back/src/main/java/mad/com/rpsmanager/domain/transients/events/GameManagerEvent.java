@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import mad.com.rpsmanager.domain.transients.events.game.GameForfeitEvent;
 import mad.com.rpsmanager.domain.transients.events.game.GameMatchPickEvent;
 import mad.com.rpsmanager.domain.transients.events.queues.QueueJoinEvent;
 import mad.com.rpsmanager.domain.transients.events.queues.QueueLeaveEvent;
@@ -23,6 +24,7 @@ import mad.com.rpsmanager.service.game.events.GameServiceVisitor;
     @JsonSubTypes.Type(value = QueueJoinEvent.class, name = "queue-join"),
     @JsonSubTypes.Type(value = QueueLeaveEvent.class, name = "queue-leave"),
     @JsonSubTypes.Type(value = GameMatchPickEvent.class, name = "match-pick"),
+    @JsonSubTypes.Type(value = GameForfeitEvent.class, name = "match-forfeit"),
 })
 @Data
 @NoArgsConstructor

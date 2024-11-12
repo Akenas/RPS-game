@@ -1,0 +1,25 @@
+<app-basic-page  [pageId]="pageId">
+    <app-overlay-menu  #overlay1  icon='cog'>
+        <app-card-menu [menuOptions]="menuOptionsArray1"></app-card-menu>
+    </app-overlay-menu>
+    @if(!selectedMode){
+        <app-mode-menu [menuOptions] ="modes" (modeSelected)="handleModeSelected($event)"/>
+    }
+    @if(selectedMode && !match){
+       <app-queue-controller (queueCancelled)="handleCancelQueue()"></app-queue-controller> 
+    }
+    @if(match){
+        <app-game [match]="match"></app-game>
+    }
+    <app-overlay-menu  #overlay2 icon='' [closeable]="false">
+        @if(match?.winner == 1){
+            <p class="title">You Won!</p>
+        }
+        @if(match?.winner == 2){
+            <p class="title">You Lost!</p>
+        }
+        <app-card-menu [menuOptions]="menuOptionsArray2" ></app-card-menu>
+    </app-overlay-menu>
+</app-basic-page>
+
+

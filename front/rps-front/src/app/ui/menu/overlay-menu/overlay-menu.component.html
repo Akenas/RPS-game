@@ -1,0 +1,18 @@
+<div class="home-button-container">
+    @if(icon !== ''){
+        <button class="glossy-button small glossy-button--blue" (click)="openOverlay()">
+            <i class="pi" [ngClass]="'pi-' + icon"></i>
+        </button>
+    }
+    
+</div>
+@if(isOverlayVisible){
+    <div class="overlay">
+        <div class="overlay-content w-full">
+            @if (closeable) {
+                <button class="close-button glossy-button small glossy-button--red" (click)="closeOverlay()">X</button>
+            }
+            <ng-content></ng-content>
+        </div>
+    </div>
+}

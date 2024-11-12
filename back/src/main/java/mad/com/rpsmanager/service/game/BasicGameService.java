@@ -40,7 +40,7 @@ public abstract class BasicGameService implements GameService{
             if(optOpponent.isPresent()){
                 Player opponent = optOpponent.get();
                 GameMatch match = createGameMatch(player, opponent, mode);
-                return Optional.of(match.start().then().createRound());
+                return Optional.of(match);
             }else{
                 GameQueue queue = getGameQueueForMode(mode);
                 queue.queuePlayer(player);
@@ -76,7 +76,7 @@ public abstract class BasicGameService implements GameService{
      */
     private Optional<Player> getOpponent(Player player, GameMode mode) {
         if(mode.getType().equals(TYPE.OFFLINE)){
-            return Optional.of(new BasicPlayer(0,"IA"));
+            return Optional.of(new BasicPlayer(1,"IA"));
         }else{
             GameQueue queue = getGameQueueForMode(mode);
             return queue.getOpponent(player);

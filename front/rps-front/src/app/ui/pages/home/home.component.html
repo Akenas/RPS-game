@@ -1,0 +1,7 @@
+<app-basic-page  [pageId]="pageId">
+    @if(player){
+        <p class="title">Welcome, {{player.alias}}</p>
+    }
+    <app-card-menu [menuOptions]="menuOptionsArray" />
+</app-basic-page>
+

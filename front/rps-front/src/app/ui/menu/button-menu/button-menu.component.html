@@ -1,0 +1,11 @@
+<div class="card-menu">
+    <div class="col-11 md:col-6 lg:col-5 xl:col-4 mx-auto">
+        @for (item of menuOptions; track item.id) {
+            <button class="menu-item glossy-button w-full mb-3" [ngClass]="'glossy-button--' + item.color" (click)="item.function()" [disabled]="!item.enabled">
+                {{ item.name }}
+            </button>
+        } @empty {
+            <p>There are no items.</p>
+        }
+    </div>
+  </div>

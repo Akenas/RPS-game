@@ -1,0 +1,106 @@
+.pick-visor{
+    height: 400px;
+    background-color: #00000050;
+    border-radius: 8px;
+    border: 3px solid var(--blue-500);
+    margin-bottom: 100px;
+    margin-top: 30px;
+    position: relative;
+    overflow: hidden;
+}
+[class^="player-"]{
+    font-size: 2em;
+    text-shadow:
+      0 2px 4px hsla(0, 0%, 0%, 0.7); /* drop shadow */
+}
+.player-1{
+    color: var(--blue-500);
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+}
+
+.player-2{
+    color: var(--red-500);
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+.option{
+    height: 80px;
+    width: 80px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    
+}
+
+.option.ROCK{
+    background-image: url("/images/rock.png");
+}
+
+.option.PAPER{
+    background-image: url("/images/paper.png");
+}
+
+.option.SCISSORS{
+    background-image: url("/images/scissors.png");
+}
+
+.option.player1 {
+    animation: player1Move 1.5s ease-out forwards,fadeOut 1s ease-in 1.5s forwards;
+    position: absolute;
+    filter: drop-shadow(0 0 4px var(--blue-500));
+}
+  
+.option.player2 {
+    animation: player2Move 1.5s ease-out forwards,fadeOut 1s ease-in 1.5s forwards;
+    
+    position: absolute;
+    filter: drop-shadow(0 0 4px var(--red-500));
+}
+
+.vs{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@keyframes player1Move {
+    0% {
+      bottom: -100px;
+      left: -100px;
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      bottom: 50%;
+      left: 30%;
+      transform: translate(-50%, 50%);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes player2Move {
+    0% {
+      top: -100px;
+      right: -100px;
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      top: 50%;
+      right: 30%;
+      transform: translate(50%, -50%);
+      opacity: 1;
+    }
+  }

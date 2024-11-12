@@ -10,4 +10,6 @@ public interface UserRepository {
     Optional<User> findByEmail(String email);
     Optional<User> findByAlias(String alias);
     User save(User user);
+    boolean existsByEmail(String email);
+    boolean existsByAlias(String alias);
 }
