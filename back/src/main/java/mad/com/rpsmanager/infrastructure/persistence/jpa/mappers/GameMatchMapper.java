@@ -1,7 +1,9 @@
 package mad.com.rpsmanager.infrastructure.persistence.jpa.mappers;
 
+import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 
 import mad.com.rpsmanager.domain.model.game.GameMatch;
@@ -18,4 +20,11 @@ public interface GameMatchMapper {
     @Mapping(source = "mode", target = "mode")
     GameMatch toDomain(JpaGameMatchEntity jpaGameMatchEntity);
     JpaGameMatchEntity toEntity(GameMatch gameMatch);
+
+    @AfterMapping
+    default void setGameMatchInRounds(@MappingTarget JpaGameMatchEntity jpaGameMatchEntity, GameMatch gameMatch) {
+        if (jpaGameMatchEntity.getRounds() != null) {
+            jpaGameMatchEntity.getRounds().forEach(round -> round.setGameMatch(jpaGameMatchEntity));
+        }
+    }
 }
