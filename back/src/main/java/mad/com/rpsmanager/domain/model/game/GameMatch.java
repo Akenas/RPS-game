@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -52,6 +54,7 @@ public class GameMatch {
     private  GameMode mode;
 
     @Getter
+    @Setter
     private int winner;
 
     /**
@@ -64,6 +67,7 @@ public class GameMatch {
      * Indicates whether the match is currently ongoing.
      */
     @Getter
+    @Setter
     private boolean ongoing;
 
     public GameMatch(String id, Player player, Player opponent, GameMode mode){
@@ -205,7 +209,13 @@ public class GameMatch {
         return this;
     }
 
+    @JsonIgnore
     public boolean isOffline(){
         return this.mode.getType().equals(TYPE.OFFLINE);
+    }
+    
+    @JsonIgnore
+    public boolean hasOngoingRound(){
+       return rounds.stream().anyMatch(r -> !r.isCompleted());
     }
 }

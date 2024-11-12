@@ -57,12 +57,31 @@ public class GameMatchTests {
         match.start();
 
         while(match.isOngoing()){
-            match.createRound()
-            .computeOngoingRound(RulesetOption.SCISSORS);
+            if(!match.hasOngoingRound())
+                match.createRound();
+                
+            match.computeOngoingRound(RulesetOption.SCISSORS);
         }
        
         Assertions.assertFalse(match.isOngoing());
         Assertions.assertNotEquals(0, match.getWinner());
+        
+    }
+
+    @Test
+    public void doesNotComputeTieRoundAsCompleted(){
+
+        GameMatch match = new GameMatch(PLAYER_1, PLAYER_2, ONLINE_MODE);
+        match.start();
+
+        match.createRound()
+        .then()
+        .computeOngoingRound(RulesetOption.SCISSORS, PLAYER_1.getId())
+        .computeOngoingRound(RulesetOption.SCISSORS, PLAYER_2.getId());
+       
+        Assertions.assertTrue(match.isOngoing());
+        Assertions.assertTrue(match.hasOngoingRound());
+        Assertions.assertEquals(0, match.getWinner());
         
     }
 

@@ -14,6 +14,7 @@ import mad.com.rpsmanager.domain.model.game.ruleset.Ruleset.RulesetOption;
 public class Round {
     
     @Getter
+    @Setter
     private long id;
     /**
      * The ruleset options size used for this round.
@@ -21,6 +22,7 @@ public class Round {
     private final int rulesetOptionsSize;
 
     @Getter
+    @Setter
     private boolean completed;
     /**
      * The result of the round, represented as an integer:
@@ -29,6 +31,7 @@ public class Round {
      * 2 if Player 2 wins.
      */
     @Getter
+    @Setter
     private int winner = -1;
 
     /**
@@ -36,7 +39,6 @@ public class Round {
      */
     @Setter
     @Getter
-    @JsonIgnore
     private RulesetOption player1Pick;
 
     /**
@@ -44,7 +46,6 @@ public class Round {
      */
     @Setter
     @Getter
-    @JsonIgnore
     private RulesetOption player2Pick;
 
     /**
@@ -63,7 +64,7 @@ public class Round {
         } else {
             winner = 2;
         }
-        this.completed = true;
+        this.completed = winner != 0;
         return this.winner;
     }
 

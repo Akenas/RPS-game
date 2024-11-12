@@ -59,7 +59,7 @@ public class PersistentGameService extends BasicGameService{
             GameMatch match = optMatch.get();
             match.computeOngoingRound(RulesetOption.values()[pick], playerId);
            
-            if(match.isOngoing())
+            if(match.isOngoing() && !match.hasOngoingRound())
                 match.createRound(); 
 
             match = gameMatchRepository.save(match);

@@ -18,6 +18,7 @@ public interface GameMatchMapper {
     @Mapping(source = "player1", target = "player1")
     @Mapping(source = "player2", target = "player2")
     @Mapping(source = "mode", target = "mode")
+    @Mapping(source = "ongoing", target = "ongoing")
     GameMatch toDomain(JpaGameMatchEntity jpaGameMatchEntity);
     JpaGameMatchEntity toEntity(GameMatch gameMatch);
 
