@@ -6,7 +6,7 @@ import { ModeOption } from '../../../model/mode-option.model';
 @Component({
   selector: 'app-mode-menu',
   standalone: true,
-  imports: [ConfirmDialogModule, CommonModule],
+  imports: [CommonModule],
   templateUrl: './mode-menu.component.html',
   styleUrl: './mode-menu.component.css'
 })

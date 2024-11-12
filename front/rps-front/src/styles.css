@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeflex/primeflex.css";
+@import "primeicons/primeicons.css";
 
 html, body{
     height: 100%;
@@ -34,14 +35,35 @@ html, body{
   background-position: center center;
 }
 
+.title{
+  text-align: center;
+  font-size: 2em;
+  font-family: sans-serif;
+  font-weight: bold;
+  color: white;
+  text-shadow:
+      0 2px 4px hsla(0, 0%, 0%, 0.7); /* drop shadow */
+}
+.glossy-button.small{
+  padding: 10px 20px;
+  font-size: 18px;
+}
+.glossy-button.small:before {
+  content: "";
+    display: block;
+    position: absolute;
+    left: 8px;
+    right: 8px;
+    top: 4px;
+    height: 15px;
+    border-radius: 15px;
+    background: linear-gradient(hsla(0, 0%, 100%, 0.8), hsla(0, 0%, 100%, 0));
+}
+
 .glossy-button {
     display: inline-block;
     position: relative;
     background-color: #AAA;
-    background-image: linear-gradient( /* chrome */
-      hsla(0, 0%, 100%, 0.6), hsla(0, 0%, 100%, 0) 50%,
-      hsla(0, 0%, 0%, 0.3) 50%, hsla(0, 0%, 100%, 0.2)
-    );
     font-size: 22px;
     font-family: sans-serif;
     font-weight: bold;

@@ -1,8 +1,8 @@
 <div class="roun-visor-panel">
-    <p class="text-center">ROUNDS</p>
+    <p class="title">ROUND {{rounds.length}}</p>
     <div class="round-visor-wrapper flex flex-row justify-content-center">
-        @for(round of [].constructor(roundsToPlay); track round; let index = $index){
-            <div class="round-visor" [ngClass]="getRoundClass(rounds[index]?.winner)"></div>
+        @for(round of [].constructor(roundsToPlay); track $index; let index = $index){
+            <div class="round-visor glossy-button small" [ngClass]="getRoundClass(rounds[index]?.winner)"></div>
            }
     </div>
 </div>

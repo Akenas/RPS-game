@@ -51,4 +51,6 @@ public interface GameService {
     Optional<Player> getPlayerByAlias(String alias);
     Player createPlayer(String alias);
     Optional<GameMatch> computeMatchRound(String matchId, long playerId, int pick);
+
+    public Optional<GameMatch> forfeitMatch(String matchId, long playerId);
 }

@@ -97,4 +97,20 @@ public class InMemoryGameService extends BasicGameService {
         setPlayerConnected(player);
         return player;
     }
+
+    @Override
+    public Optional<GameMatch> forfeitMatch(String matchId, long playerId) {
+        GameMatch match = ongoingMatches.get(matchId);
+        if(match != null){
+            if(match.getPlayer1().getId() == playerId){
+                match.setWinner(2);
+            }else{
+                match.setWinner(1);
+            }
+            match.finish();
+            ongoingMatches.remove(matchId);
+            return Optional.of(match);
+
+        } else return Optional.empty();
+    }
 }

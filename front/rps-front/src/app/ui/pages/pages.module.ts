@@ -10,6 +10,7 @@ import { PlayPageComponent } from './play/play.component';
 import { ModeMenuComponent } from '../menu/mode-menu/mode-menu.component';
 import { QueueControllerComponent } from "../game/queue-controller/queue-controller.component";
 import { GameComponent } from "../game/game.component";
+import { OverlayMenuComponent } from "../menu/overlay-menu/overlay-menu.component";
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { GameComponent } from "../game/game.component";
     CardModule,
     ModeMenuComponent,
     QueueControllerComponent,
-    GameComponent
+    GameComponent,
+    OverlayMenuComponent
 ],
   exports: [
     HomePageComponent,

@@ -12,6 +12,8 @@ export class OptionPickerComponent {
 
   @Input() availableOptions : string[] = []
   @Output() optionLocked = new EventEmitter<number | null>();
+  @Input() isLockEnabled: boolean = false;
+
   selectedOptionIndex: number | null = null;
 
   selectOption(index: number): void {
@@ -23,5 +25,9 @@ export class OptionPickerComponent {
     if (this.selectedOptionIndex !== null) {
       this.optionLocked.emit(this.selectedOptionIndex);
     }
+  }
+
+  resetSelection(){
+    this.selectedOptionIndex=null;
   }
 }

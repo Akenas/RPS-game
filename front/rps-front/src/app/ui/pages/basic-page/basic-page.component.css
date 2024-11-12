@@ -1,5 +1,5 @@
 .logo-wrapper img{
-    width: 280px;
+    width: 220px;
 }
 .logo-wrapper{
     text-align: center;
@@ -7,4 +7,7 @@
     top: 0;
     left: 0;
     right: 0;
+}
+.page{
+    position: relative;
 }

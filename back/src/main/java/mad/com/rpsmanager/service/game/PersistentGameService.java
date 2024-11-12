@@ -93,4 +93,22 @@ public class PersistentGameService extends BasicGameService{
     public Player createPlayer(String alias) {
        return playerRepository.save(new BasicPlayer(0,alias)); 
     }
+
+    @Override
+    public Optional<GameMatch> forfeitMatch(String matchId, long playerId) {
+        Optional<GameMatch> optMatch = gameMatchRepository.findById(matchId);
+
+        if(optMatch.isPresent()){
+            GameMatch match = optMatch.get();
+            if(match.getPlayer1().getId() == playerId){
+                match.setWinner(2);
+            }else{
+                match.setWinner(1);
+            }
+            match.finish();
+            match = gameMatchRepository.save(match);
+            return Optional.of(match);
+
+        }else return Optional.empty();
+    }
 }

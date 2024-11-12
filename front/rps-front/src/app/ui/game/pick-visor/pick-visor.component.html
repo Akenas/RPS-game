@@ -1,0 +1,13 @@
+<div class="pick-visor">
+    <div class="player-2">{{player2}}</div>
+    @if(round !== undefined && isVisible){
+        <div class="option player1" [class]="round.player1Pick">
+
+        </div>
+        <div class="option player2" [class]="round.player2Pick">
+
+        </div>
+    }
+    <p class="vs title">VS</p>
+    <div class="player-1">{{player1}}</div>
+</div>

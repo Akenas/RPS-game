@@ -1,7 +1,5 @@
 package mad.com.rpsmanager.domain.model.game;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;

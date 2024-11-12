@@ -4,8 +4,9 @@ import { Component, Input } from '@angular/core';
 interface MenuOption {
   id: number;
   name: string;
-  link: string;
+  function:() => void
   color: string;
+  enabled: boolean;
 }
 
 @Component({

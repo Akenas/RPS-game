@@ -14,6 +14,7 @@ export class GameService {
   private apiUrl = 'http://localhost:8080/game';
   private socketUrl = 'http://localhost:8080/ws/game';
   private connection: CompatClient | undefined = undefined;
+  private connectionReady = new ReplaySubject<boolean>(1);
   private currentPlayerSubject = new ReplaySubject<Player | null>(1);
   public currentPlayer = this.currentPlayerSubject.asObservable();
 
@@ -24,11 +25,25 @@ export class GameService {
 
   }
 
-  initConnection(): void{
-    const socket = new SockJS(this.socketUrl);
-    this.connection = Stomp.over(socket);
+  initConnection(): void {
+    this.connection = Stomp.over(() => new SockJS(this.socketUrl));
     const token = localStorage.getItem("jwtToken");
-    this.connection.connect({"Authorization":"Bearer " + token}, () => {});
+
+    this.connection.connect(
+      { "Authorization": "Bearer " + token },
+      () => {
+        console.log('WebSocket connection established');
+        this.connectionReady.next(true); 
+      },
+      (error: any) => {
+        console.error('WebSocket connection error:', error);
+        this.connectionReady.next(false);
+      }
+    );
+  }
+
+  waitForConnection(): Observable<boolean> {
+    return this.connectionReady.asObservable();
   }
 
   getGameModes(): Observable<ModeOption[]> {
@@ -96,11 +111,33 @@ export class GameService {
         const event = {
           type: 'match-pick',
           playerId: playerId,
-          optionId: optionId,
+          pick: optionId,
           matchId: matchId
         };
         this.connection.send('/app/match/pick', {}, JSON.stringify(event));
       }
     }).unsubscribe(); // Unsubscribe immediately to avoid keeping the subscription open
   }
+
+  forfeitMatch(matchId: string): void {
+    this.currentPlayerSubject.subscribe((player) => {
+      const playerId = player?.id;
+      if (playerId && this.connection?.connected) {
+        const event = {
+          type: 'match-forfeit',
+          playerId: playerId,
+          matchId: matchId
+        };
+        this.connection.send('/app/match/forfeit', {}, JSON.stringify(event));
+      }
+    }).unsubscribe(); // Unsubscribe immediately to avoid keeping the subscription open
+  }
+
+  disconnect(): void {
+    if (this.connection && this.connection.connected) {
+        this.connection.disconnect(() => {
+            console.log('WebSocket connection disconnected.');
+        });
+    }
+}
 }

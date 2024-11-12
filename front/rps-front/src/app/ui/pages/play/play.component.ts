@@ -1,8 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, QueryList, ViewChildren } from '@angular/core';
 import { GameService } from '../../../services/game/game.service';
 import { ModeOption } from '../../../model/mode-option.model';
 import { GameMatch } from '../../../model/gameMatch.model';
 import { Player } from '../../../model/player.model';
+import { OverlayMenuComponent } from '../../menu/overlay-menu/overlay-menu.component';
+import { Router } from '@angular/router';
+import { OptionPickerComponent } from '../../game/option-picker/option-picker.component';
 
 
 
@@ -14,13 +17,27 @@ import { Player } from '../../../model/player.model';
 })
 export class PlayPageComponent {
 
+  @ViewChildren(OverlayMenuComponent) overlayMenus!: QueryList<OverlayMenuComponent>;
+  @ViewChildren(OptionPickerComponent) optionPicker!: QueryList<OptionPickerComponent>;
+
   pageId :string = "play-page"
   selectedMode : ModeOption | null = null;
   modes: ModeOption[] = [];
   match: GameMatch | null = null ;
   player: Player | null = null;
+  menuOptionsArray1 = [
 
-  constructor(private gameService: GameService){}
+    { id: 1, name: 'Options', function: ()=>{}, color: "", enabled: false},
+    { id: 2, name: 'Forfeit', function:()=>{this.forfeitMatch()}, color: "red",enabled: true }
+  ];
+
+  menuOptionsArray2 = [
+
+    { id: 1, name: 'Rematch', function: ()=>{this.handleRematch()}, color: "green", enabled: true},
+    { id: 2, name: 'Go Home', function:()=>{this.router.navigate(["/"])}, color: "blue",enabled: true }
+  ];
+
+  constructor(private gameService: GameService, private router: Router){}
 
   ngOnInit(): void {
     
@@ -28,6 +45,12 @@ export class PlayPageComponent {
     if (savedMatch) {
       this.match = JSON.parse(savedMatch);
       this.selectedMode = this.match!.mode;
+
+      this.gameService.waitForConnection().subscribe((connected) => {
+        if (connected && this.match) {
+          this.handleMatchSubscription(this.match);
+        }
+      });
     }
     
     this.gameService.getGameModes().subscribe({
@@ -42,6 +65,14 @@ export class PlayPageComponent {
     this.gameService.getPlayerData().subscribe(player => {
       this.player = player;
     });
+    this.gameService.initConnection();
+  }
+
+  ngOnDestroy(): void {
+    // Perform cleanup here
+    console.log('Component is being destroyed.');
+    localStorage.removeItem('savedMatch');
+    this.gameService.disconnect();
   }
 
   handleModeSelected(item: ModeOption) {
@@ -61,10 +92,41 @@ export class PlayPageComponent {
   handleMatchSubscription(match: GameMatch) {
     this.gameService.subscribeToMatch(match.id).subscribe(updatedMatch => {
       this.match = updatedMatch;
-      localStorage.setItem('savedMatch', JSON.stringify(updatedMatch));
+      if(!this.match.ongoing){
+        setTimeout(() => {
+          this.openOverlay(1);
+        }, 2000);
+       
+      }else{
+        localStorage.setItem('savedMatch', JSON.stringify(updatedMatch));
+      }
+     
     });
   }
 
+  openOverlay(index: number) {
+    const overlay = this.overlayMenus.toArray()[index];
+    if (overlay) {
+      overlay.openOverlay();
+    }
+  }
+
+  closeOverlay(index: number) {
+    const overlay = this.overlayMenus.toArray()[index];
+    if (overlay) {
+      overlay.closeOverlay();
+    }
+  }
+
+  handleRematch(){
+    this.handleModeSelected(this.match!.mode); 
+    this.closeOverlay(1);
+  }
+
+  forfeitMatch(){
+    this.gameService.forfeitMatch(this.match!.id)
+    this.router.navigate(["/"])
+  }
 }
 
 

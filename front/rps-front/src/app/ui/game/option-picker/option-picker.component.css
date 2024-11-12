@@ -1,5 +1,5 @@
 .option-picker-panel{
-    position: fixed;
+    position: absolute;
     bottom: 10px;
     left: 0;
     right: 0;

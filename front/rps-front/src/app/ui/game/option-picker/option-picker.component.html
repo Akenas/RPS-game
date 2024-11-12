@@ -11,7 +11,7 @@
            }
     </div>
     <div class="col-11 md:col-8 lg:col-6 xl:col-6 mx-auto mt-4">
-        <button (click)="lockSelection()" class="glossy-button glossy-button--green w-full"><span>Lock Selection</span></button>
+        <button (click)="lockSelection()"  class="glossy-button w-full" [ngClass]="{'glossy-button--green': !isLockEnabled}" [disabled]="isLockEnabled" ><span>Lock Selection</span></button>
     </div>
 </div>
 

@@ -8,6 +8,7 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import mad.com.rpsmanager.domain.model.game.GameMatch;
+import mad.com.rpsmanager.domain.transients.events.game.GameForfeitEvent;
 import mad.com.rpsmanager.domain.transients.events.game.GameMatchPickEvent;
 import mad.com.rpsmanager.domain.transients.events.queues.QueueJoinEvent;
 import mad.com.rpsmanager.domain.transients.events.queues.QueueLeaveEvent;
@@ -57,4 +58,16 @@ public class GameEventWebSocketProcessor extends GameEventProcessor {
             messagingTemplate.convertAndSend(topicPath, mapper.writeValueAsString(match));
         }
     }
+
+    @Override
+    public void visit(GameForfeitEvent event) throws IOException {
+        Optional<GameMatch> optMatch = gameService.forfeitMatch(event.getMatchId(), event.getPlayerId());
+        if(optMatch.isPresent()){
+            GameMatch match = optMatch.get();
+            String topicPath = "/match/" + match.getId();
+            messagingTemplate.convertAndSend(topicPath, mapper.writeValueAsString(match));
+        }
+    }
+
+    
 }
