@@ -1,9 +1,7 @@
-version: '3.8'
-
 services:
   db:
     image: mysql:8.0
-    container_name: mysql_db
+    container_name: mysql_db_rps
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s
@@ -15,7 +13,7 @@ services:
       MYSQL_USER: myuser
       MYSQL_PASSWORD: mypassword
     ports:
-      - '3306:3306'
+      - "3306:3306"
     volumes:
       - db_data:/var/lib/mysql
     networks:
@@ -25,26 +23,44 @@ services:
     build:
       context: ./back
       dockerfile: Dockerfile
-    container_name: backend_service
+    container_name: backend_service_rps
     depends_on:
       db:
         condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql_db:3306/rpsdb?serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql_db_rps:3306/rpsdb?serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true
       SPRING_DATASOURCE_USERNAME: myuser
       SPRING_DATASOURCE_PASSWORD: mypassword
     ports:
-      - '8080:8080'
+      - "${BACKEND_PORT:-8080}:8080"
+    networks:
+      - app-network
+
+  frontend:
+    build:
+      context: ./front/rps-front
+      dockerfile: Dockerfile
+    container_name: frontend_service_rps
+    depends_on:
+      backend:
+        condition: service_healthy
+    ports:
+      - "${FRONTEND_PORT:-8081}:80"
     networks:
       - app-network
 
 volumes:
-  db_data:  
+  db_data:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /opt/mysql_data
+      device: ${DB_DATA_VOLUME:-/opt/mysql_data}
 
 networks:
   app-network:

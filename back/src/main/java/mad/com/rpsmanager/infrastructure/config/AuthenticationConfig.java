@@ -29,7 +29,7 @@ public class AuthenticationConfig {
     @Value("${security.jwt.secret-key}")
     private String secretKey;
 
-    @Value("${security.jwt.expiration-time:3600000}")
+    @Value("${security.jwt.expiration-time:28800000}")
     private long jwtExpiration;
 
     private final UserRepository userRepository;
