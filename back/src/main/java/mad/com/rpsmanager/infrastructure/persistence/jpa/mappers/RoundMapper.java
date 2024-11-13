@@ -16,12 +16,16 @@ public interface RoundMapper {
 
     @Mapping(source = "player1Pick", target = "player1Pick", qualifiedByName = "intToRulesetOption")
     @Mapping(source = "player2Pick", target = "player2Pick", qualifiedByName = "intToRulesetOption")
-    @Mapping(source = "jpaRoundEntity.gameMatch.mode.ruleset.roundsToPlay", target = "rulesetOptionsSize")
+    @Mapping(target = "rulesetOptionsSize", expression = "java(mapRulesetOptionsSize(jpaRoundEntity))")
     Round toDomain(JpaRoundEntity jpaRoundEntity);
 
     @Mapping(source = "round.player1Pick", target = "player1Pick", qualifiedByName = "rulesetOptionToInt")
     @Mapping(source = "round.player2Pick", target = "player2Pick", qualifiedByName = "rulesetOptionToInt")
     JpaRoundEntity toEntity(Round round);
+
+    default int mapRulesetOptionsSize(JpaRoundEntity jpaRoundEntity) {
+        return jpaRoundEntity.getGameMatch().getMode().getRuleset().getRulesetOptions().size();
+    }
 
     @Named("intToRulesetOption")
     default Ruleset.RulesetOption intToRulesetOption(Integer pick) {
