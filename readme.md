@@ -15,11 +15,13 @@ You can find a quick demo video here: https://streamable.com/aku35c
   - Round-by-round data for future analysis
 - **Basic AI**: The computer opponent randomly selects Rock, Paper, or Scissors.
 ## Prerequisites
-For development purposes, you need to be sure you have some things installed on your machine. Find below the commands to install everything in case you don't have them already. If you just want to run the whole project as quickly as possible , jump to the 'Running with Docker ' section of this file.
+For development purposes, you need to be sure you have some things installed on your machine. Find below the commands to install everything in case you don't have them already. If you just want to run the whole project as quickly as possible , jump to the 'Running with Docker ' section of this file.  
+
 We assume you are using Ubuntu ; commands may change based on your distribution .
 ### Backend Requirements
-For the backend , you need Java 21 and Maven so you can build and run the project locally. We also provide steps on how to configure a MySQL instance for data storage.
-**Java 21**
+For the backend , you need Java 21 and Maven so you can build and run the project locally. We also provide steps on how to configure a MySQL instance for data storage.  
+
+**Java 21**  
 You can install any version of Java 21 , but we recommend using Eclipse Temurin. To install temurin-21-jdk , run the following commands:
 ```bash
 sudo apt install -y wget gnupg
@@ -66,7 +68,7 @@ Sure! Here is the corrected text maintaining the same number of words:
 And run the following command to create a user
 ```sql
 CREATE USER 'myuser'@'localhost' IDENTIFIED BY 'mypassword';
-GRANT ALL PRIVILEGES ON your_database_name.* TO 'myuser'@'localhost';
+GRANT ALL PRIVILEGES ON *.* TO 'myuser'@'localhost';
 FLUSH PRIVILEGES;
 ```
 ### Frontend requisites
@@ -120,8 +122,9 @@ To verify that Docker is correctly installed , you can run the hello-world conta
 docker run hello-world
 ```
 ## Running with Docker
-If you don't want to install all the prerequisites for development or you simply want to see how the app works without making any changes , we provide a docker-compose . yml file.
-**Note**: You still need to have Docker installed.
+If you don't want to install all the prerequisites for development or you simply want to see how the app works without making any changes , we provide a docker-compose . yml file.  
+**Note**: You still need to have Docker installed.  
+
 First , generate a folder on your system where MySQL will store the data or modify the .env file provided to set an already existing directory :
 ```bash
 mkdir /opt/mysql_data
@@ -130,6 +133,7 @@ Then, from the root folder of the project , run:
 ```bash
 docker compose up
 ```
-The docker-compose . yml file will generate three different containers : one with a MySQL instance, one with the backend app , and the last one with the frontend app.
-Just visit localhost:8081 and enjoy your game.
-If multiple users run the Docker compose from the same machine, every user must set a range of free ports in the .env file. Otherwise, the containers will not run.
+The docker-compose . yml file will generate three different containers : one with a MySQL instance, one with the backend app , and the last one with the frontend app.  
+Just visit localhost:8081 and enjoy your game.  
+
+**NOTE**: If multiple users run the Docker compose from the same machine, every user must set a range of free ports in the .env file. Otherwise, the containers will not run.
