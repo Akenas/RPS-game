@@ -3,6 +3,7 @@ Rock-Paper-Scissor Game
 
 ## Overview
 This is a simple **Rock, Paper, Scissors** game developed to demonstrate basic game mechanics and data persistence for analysis. The game allows users to compete against a computer opponent. Player data, game history, and round details are stored for later analysis.
+You can find a quick demo video here: https://streamable.com/aku35c
 
 ## Features
 - **Player Management**: Users can register and play multiple games.
@@ -153,5 +154,5 @@ Then, from the root folder of the project run:
 docker compose up
 ```
 The docker-compose-yml file will generate three different containers. One with a mysql instance, one with the backend app and the last one with the frontend app.
-Just go to localhost:8080 and enjoy your game.  
+Just go to localhost:8081 and enjoy your game.  
 If multiple users run  the docker compose from the same machine, every user must set a range of free ports on the .env file. In any other case the containers will not run.
