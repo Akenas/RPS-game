@@ -1,0 +1,7 @@
+.home-button-container {
+    position: absolute;
+    display: inline-block; /* Allows positioning of arrow relative to the square */
+    top: 50px;
+    left: 10px;
+    z-index: 1;
+  }
