@@ -127,6 +127,10 @@ export class PlayPageComponent {
     this.gameService.forfeitMatch(this.match!.id)
     this.router.navigate(["/"])
   }
+
+  goHome(){
+    this.router.navigate(["/"])
+  }
 }
 
 
